@@ -1,8 +1,8 @@
 function App() {
   return (
     <>
-      <header className="sticky top-0 z-10 flex flex-row justify-between items-center w-full p-4 bg-amber-300/80">
-        <h1 className="text-4xl font-bold font-handwriting text-orange-950">
+      <header className="sticky top-0 z-10 flex flex-row justify-between items-center w-full h-14 px-4 py-2 bg-amber-300">
+        <h1 className="text-3xl font-bold font-handwriting text-orange-950">
           in the sand
         </h1>
 
@@ -47,7 +47,7 @@ function App() {
 
         <div className="flex flex-col lg:flex-row min-h-screen w-full">
           <section className="w-full lg:w-1/2 min-h-screen py-2 px-4 border-r-2 border-slate-300">
-            <h2 className="sticky top-16 py-2 text-4xl font-bold font-title text-center text-orange-950 bg-white">
+            <h2 className="sticky top-14 py-3 text-4xl font-bold font-title text-center text-orange-950 bg-white">
               Blog Post Previews
             </h2>
             <p className="font-opensans">
@@ -71,7 +71,7 @@ function App() {
               perspiciatis perferendis est nam.
             </p>
           </section>
-          <section className="sticky top-16 w-full lg:w-1/2 h-96 p-2 mb-4 overflow-hidden">
+          <section className="sticky top-14 w-full lg:w-1/2 h-96 p-2 mb-4 overflow-hidden">
             <img
               src="/maps.jpg"
               alt=""
@@ -80,7 +80,7 @@ function App() {
           </section>
         </div>
       </main>
-      <footer className="flex flex-col md:flex-row items-center justify-center p-4 bg-amber-200">
+      <footer className="flex flex-col md:flex-row items-center justify-center w-full px-4 py-3 bg-amber-200">
         <ul className="flex flex-row space-x-4 list-none">
           <li>Contact</li>
           <li>Credits</li>
