@@ -1,9 +1,13 @@
+import { Link } from "wouter";
+
 function AppHeader() {
   return (
     <header className="sticky top-0 z-10 flex flex-row justify-between items-center w-full h-14 px-4 py-2 bg-amber-300">
-      <h1 className="text-3xl font-bold font-handwriting text-orange-950">
-        in the sand
-      </h1>
+      <Link href="/">
+        <h1 className="text-3xl font-bold font-handwriting text-orange-950 cursor-pointer">
+          in the sand
+        </h1>
+      </Link>
 
       <div className="md:hidden cursor-pointer">
         <svg
@@ -23,16 +27,16 @@ function AppHeader() {
       </div>
       <nav className="hidden md:flex md:flex-row md:space-x-2 list-none">
         <li>
-          <a href="#">Home</a>
+          <Link href="/">Home</Link>
         </li>
         <li>
-          <a href="#">About</a>
+          <Link href="/about">About</Link>
         </li>
         <li>
-          <a href="#">New Post</a>
+          <Link href="/new-post">New Post</Link>
         </li>
         <li>
-          <a href="#">Login</a>
+          <Link href="#">Login</Link>
         </li>
       </nav>
     </header>
