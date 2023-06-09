@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import AuthorAvatar from "./AuthorAvatar";
 
 function PreviewCard({ blogPost }) {
   const start = new Date(blogPost.startDate);
@@ -7,6 +8,7 @@ function PreviewCard({ blogPost }) {
   return (
     <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50 text-orange-950">
       <div className="relative w-full h-64 rounded-t-md">
+        {/*TODO: maybe center the image */}
         <img
           src={blogPost.imageSrc}
           alt=""
@@ -61,16 +63,11 @@ function PreviewCard({ blogPost }) {
         </div>
         <p className="line-clamp-3 my-4">{blogPost.text}</p>
         <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center space-x-2">
-            <div className="rounded-full shadow-md w-12 h-12">
-              <img
-                src={blogPost.authorImg}
-                alt=""
-                className="rounded-full object-cover w-full h-full overflow-hidden"
-              />
-            </div>
-            <p className="font-handwriting text-3xl">{blogPost.authorName}</p>
-          </div>
+          <AuthorAvatar
+            id={blogPost.authorId}
+            image={blogPost.authorImg}
+            name={blogPost.authorName}
+          />
           <Link
             href="#"
             className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 hover:decoration-orange-800/80"
