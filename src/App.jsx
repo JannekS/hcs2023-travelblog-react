@@ -6,14 +6,27 @@ import NewPost from "./pages/NewPost";
 import Contact from "./pages/Contact";
 import Credits from "./pages/Credits";
 
+import { useState, useEffect } from "react";
 import { Route } from "wouter";
 
 function App() {
+  const [blogPosts, setBlogPosts] = useState([]);
+  useEffect(() => {
+    getPosts("/blogposts.json");
+  }, []);
+
+  async function getPosts(url) {
+    const res = await fetch(url);
+    const blogPostData = await res.json();
+    console.log(blogPostData);
+    setBlogPosts(blogPostData);
+  }
+
   return (
     <>
       <AppHeader />
       <Route path="/">
-        <Home />
+        <Home blogPosts={blogPosts} />
       </Route>
       <Route path="/about">
         <About />
