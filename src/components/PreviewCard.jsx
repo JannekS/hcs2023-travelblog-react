@@ -5,7 +5,7 @@ function PreviewCard({ blogPost }) {
   const end = new Date(blogPost.endDate);
 
   return (
-    <div className="flex flex-col max-w-xl rounded-md shadow-lg bg-amber-50 text-orange-950">
+    <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50 text-orange-950">
       <div className="relative w-full h-64 rounded-t-md">
         <img
           src={blogPost.imageSrc}
@@ -33,9 +33,12 @@ function PreviewCard({ blogPost }) {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1">
-          {blogPost.title}
+        <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1 hover:underline hover:underline-offset-4 decoration-2 decoration-orange-800/60">
+          {" "}
+          {/*TODO: Make inline-block work with line-clamp*/}
+          <Link href="#">{blogPost.title}</Link>
         </h3>
+
         <div className="flex flex-row items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +73,7 @@ function PreviewCard({ blogPost }) {
           </div>
           <Link
             href="#"
-            className="pb-1 border-b-2 border-opacity-75 border-orange-900 hover:border-b-4 hover:pb-0"
+            className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 hover:decoration-orange-800/80"
           >
             Read more
           </Link>
@@ -81,3 +84,5 @@ function PreviewCard({ blogPost }) {
 }
 
 export default PreviewCard;
+
+// pb-1 border-b-2 border-opacity-75 border-orange-900 hover:border-b-4 hover:pb-0
