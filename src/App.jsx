@@ -18,7 +18,6 @@ function App() {
   async function getPosts(url) {
     const res = await fetch(url);
     const blogPostData = await res.json();
-    console.log(blogPostData);
     setBlogPosts(blogPostData);
   }
 

@@ -1,5 +1,4 @@
 function PostPreviewSection({ blogPosts }) {
-  console.log(blogPosts[0]);
   return (
     <section className="w-full lg:w-1/2 min-h-screen py-2 px-4 border-r-2 border-slate-300">
       <h2 className="sticky top-14 py-3 text-4xl font-bold font-title text-center text-orange-950 bg-white">
@@ -8,7 +7,7 @@ function PostPreviewSection({ blogPosts }) {
       {blogPosts ? (
         <ul>
           {blogPosts.map((post) => (
-            <li>{post.title}</li>
+            <li key={post.id}>{post.title}</li>
           ))}
         </ul>
       ) : (
