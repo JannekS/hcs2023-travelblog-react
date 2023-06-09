@@ -1,12 +1,9 @@
 import { Link } from "wouter";
 import { MapPin } from "@heroicons/react/24/solid";
-import { CalendarDays } from "@heroicons/react/24/outline";
 import AuthorAvatar from "./AuthorAvatar";
+import TravelDuration from "./TravelDuration";
 
 function PreviewCard({ blogPost }) {
-  const start = new Date(blogPost.startDate);
-  const end = new Date(blogPost.endDate);
-
   return (
     <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50 text-orange-950">
       <div className="relative w-full h-64 rounded-t-md">
@@ -32,13 +29,10 @@ function PreviewCard({ blogPost }) {
           <Link href="#">{blogPost.title}</Link>
         </h3>
 
-        <div className="flex flex-row items-center space-x-2">
-          <CalendarDays className="w-5 h-5" />
-          <p>
-            {start.toLocaleDateString("en-GB")} to{" "}
-            {end.toLocaleDateString("en-GB")}
-          </p>
-        </div>
+        <TravelDuration
+          startDateStr={blopPost.startDate}
+          endDateStr={blogPost.endDate}
+        />
         <p className="line-clamp-3 my-4">{blogPost.text}</p>
         <div className="flex flex-row items-center justify-between">
           <AuthorAvatar
