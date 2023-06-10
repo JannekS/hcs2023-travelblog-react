@@ -1,15 +1,10 @@
-import { Marker, Popup } from "react-map-gl";
-import { useState } from "react";
-import TravelDuration from "./TravelDuration";
-import AuthorAvatar from "./AuthorAvatar";
-import { Link } from "wouter";
+import { Marker } from "react-map-gl";
+// import { useState } from "react";
+// import TravelDuration from "./TravelDuration";
+// import AuthorAvatar from "./AuthorAvatar";
+// import { Link } from "wouter";
 
 function LocationMarker({ location }) {
-  const [showPopup, setShowPopup] = useState(false);
-
-  function handleMarkerClick() {
-    setShowPopup(!showPopup);
-  }
   return (
     <>
       <Marker
@@ -17,15 +12,17 @@ function LocationMarker({ location }) {
         longitude={location.lon}
         latitude={location.lat}
         color="orange"
-        onClick={handleMarkerClick}
+        // onClick={handleMarkerClick}
       ></Marker>
-      {showPopup && (
+      {/* {showPopup && (
         <Popup
           longitude={location.lon}
           latitude={location.lat}
           anchor="bottom"
           offset={30}
+          focusAfterOpen={false}
           closeOnClick={false}
+          closeOnMove={true}
           className="rounded-md"
           onClose={() => setShowPopup(false)}
         >
@@ -46,14 +43,14 @@ function LocationMarker({ location }) {
               />
               <Link
                 href={`/post/${location.id}`}
-                className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 focus:none hover:decoration-orange-800/80"
+                className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 focus:outline-none hover:decoration-orange-800/80"
               >
                 Read more
               </Link>
             </div>
           </div>
         </Popup>
-      )}
+      )} */}
     </>
   );
 }
