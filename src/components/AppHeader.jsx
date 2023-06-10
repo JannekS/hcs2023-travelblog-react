@@ -2,7 +2,7 @@ import { Link } from "wouter";
 
 function AppHeader() {
   return (
-    <header className="sticky top-0 z-10 flex flex-row justify-between items-center w-full h-14 px-4 py-2 bg-amber-300">
+    <header className="sticky top-0 z-50 flex flex-row justify-between items-center w-full h-14 px-4 py-2 bg-amber-300">
       <Link href="/">
         <h1 className="text-3xl font-bold font-handwriting text-orange-950 cursor-pointer">
           in the sand
