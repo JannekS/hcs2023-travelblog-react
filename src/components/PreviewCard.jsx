@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin } from "@heroicons/react/24/solid";
+import { MapPinIcon } from "@heroicons/react/24/solid";
 import AuthorAvatar from "./AuthorAvatar";
 import TravelDuration from "./TravelDuration";
 
@@ -15,7 +15,7 @@ function PreviewCard({ blogPost }) {
         />
         <div className="absolute bottom-0 right-0 left-0 flex flex-row items-center justify-between space-x-2 bg-gradient-to-b from-transparent to-gray-900 p-4 text-orange-50">
           <div className="flex flex-row items-center space-x-1">
-            <MapPin className="w-5 h-5" />
+            <MapPinIcon className="w-5 h-5" />
             <p>
               {blogPost.location}, {blogPost.country}
             </p>
@@ -30,7 +30,7 @@ function PreviewCard({ blogPost }) {
         </h3>
 
         <TravelDuration
-          startDateStr={blopPost.startDate}
+          startDateStr={blogPost.startDate}
           endDateStr={blogPost.endDate}
         />
         <p className="line-clamp-3 my-4">{blogPost.text}</p>
