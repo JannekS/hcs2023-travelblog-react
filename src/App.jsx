@@ -6,9 +6,10 @@ import NewPost from "./pages/NewPost";
 import Contact from "./pages/Contact";
 import Credits from "./pages/Credits";
 import BlogPost from "./pages/BlogPost";
+import ScrollToTop from "./utils/ScrollToTop";
 
 import { useState, useEffect } from "react";
-import { Route, Switch } from "wouter";
+import { Router, Route, Switch } from "wouter";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -23,34 +24,39 @@ function App() {
     setBlogPosts(blogPostData);
   }
 
+  ScrollToTop();
+
   return (
     <>
       <AppHeader />
-      <Switch>
-        <Route path="/">
-          <Home blogPosts={blogPosts} />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/new-post">
-          <NewPost />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/credits">
-          <Credits />
-        </Route>
-        <Route path="/post/:id">
-          {(params) => (
-            <BlogPost post={blogPosts.find((post) => post.id == params.id)} />
-          )}
-        </Route>
-        <Route>
-          <NotFound />
-        </Route>
-      </Switch>
+      <Router>
+        <ScrollToTop />
+        <Switch>
+          <Route path="/">
+            <Home blogPosts={blogPosts} />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/new-post">
+            <NewPost />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/credits">
+            <Credits />
+          </Route>
+          <Route path="/post/:id">
+            {(params) => (
+              <BlogPost post={blogPosts.find((post) => post.id == params.id)} />
+            )}
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
 
       <AppFooter />
     </>
