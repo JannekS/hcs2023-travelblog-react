@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Map, { Marker, Popup } from "react-map-gl";
+import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -22,6 +22,8 @@ function MapSection() {
           }}
           style={{ borderRadius: "0.5rem" }}
           mapStyle="mapbox://styles/mapbox/outdoors-v9"
+          renderWorldCopies={false}
+          scrollZoom={false}
           mapboxAccessToken={MAPBOX_TOKEN}
         >
           <Marker
@@ -44,6 +46,7 @@ function MapSection() {
               You are here
             </Popup>
           )}
+          <NavigationControl />
         </Map>
       </div>
     </section>
