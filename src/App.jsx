@@ -40,8 +40,10 @@ function App() {
       <Route path="/credits">
         <Credits />
       </Route>
-      <Route path="/post">
-        <BlogPost post={blogPosts[0]} />
+      <Route path="/post/:id">
+        {(params) => (
+          <BlogPost post={blogPosts.find((post) => post.id == params.id)} />
+        )}
       </Route>
 
       <AppFooter />

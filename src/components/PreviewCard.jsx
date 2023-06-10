@@ -26,7 +26,7 @@ function PreviewCard({ blogPost }) {
         <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1 hover:underline hover:underline-offset-4 decoration-2 decoration-orange-800/60">
           {" "}
           {/*TODO: Make inline-block work with line-clamp*/}
-          <Link href="#">{blogPost.title}</Link>
+          <Link href={`/post/${blogPost.id}/#start`}>{blogPost.title}</Link>
         </h3>
 
         <TravelDuration
@@ -41,7 +41,7 @@ function PreviewCard({ blogPost }) {
             name={blogPost.authorName}
           />
           <Link
-            href="#"
+            href={`/post/${blogPost.id}/#start`}
             className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 hover:decoration-orange-800/80"
           >
             Read more
