@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import LocationMarker from "./LocationMarker";
@@ -13,9 +13,12 @@ function MapSection({ blogPosts, focusLocation }) {
   const [showPopup, setShowPopup] = useState(false);
   const [chosenLocation, setChosenLocation] = useState();
 
+  // TODO: refactor this
   function handleMarkerClick(id) {
+    chosenLocation && showPopup && chosenLocation.id === id
+      ? setShowPopup(false)
+      : setShowPopup(true);
     setChosenLocation(blogPosts.find((post) => post.id === id));
-    setShowPopup(!showPopup);
   }
   return (
     <section className="sticky top-12 w-full h-[85vh] lg:h-[80vh] lg:w-1/2 px-4 mb-4">
@@ -41,6 +44,7 @@ function MapSection({ blogPosts, focusLocation }) {
               />
             ))}
             {showPopup && (
+              // TODO: refactor into separate component
               <Popup
                 longitude={chosenLocation.lon}
                 latitude={chosenLocation.lat}
