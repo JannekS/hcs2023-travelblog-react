@@ -1,7 +1,8 @@
 import TravelDuration from "../components/TravelDuration";
 import AuthorAvatar from "../components/AuthorAvatar";
-import { MapPinIcon } from "@heroicons/react/24/solid";
+import { MapPinIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import NotFound from "./NotFound";
+import { Link } from "wouter";
 
 function BlogPost({ post }) {
   return post ? (
@@ -39,6 +40,15 @@ function BlogPost({ post }) {
           />
         </div>
         <article className="prose max-w-3xl my-4">{post.text}</article>
+        <div className="lg:fixed lg:left-2 lg:top-16 flex flex-row items-center justify-end space-x-1">
+          <ArrowLeftIcon className="w-5 h-5" />
+          <Link
+            href="/"
+            className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 hover:decoration-orange-800/80"
+          >
+            home
+          </Link>
+        </div>
       </div>
     </div>
   ) : (
