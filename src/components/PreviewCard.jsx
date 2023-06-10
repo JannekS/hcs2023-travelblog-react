@@ -5,7 +5,7 @@ import TravelDuration from "./TravelDuration";
 
 function PreviewCard({ blogPost }) {
   return (
-    <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50 text-orange-950">
+    <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50">
       <div className="relative w-full h-64 rounded-t-md">
         {/*TODO: maybe center the image */}
         <img
