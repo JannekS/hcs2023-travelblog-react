@@ -5,6 +5,7 @@ import About from "./pages/About";
 import NewPost from "./pages/NewPost";
 import Contact from "./pages/Contact";
 import Credits from "./pages/Credits";
+import BlogPost from "./pages/BlogPost";
 
 import { useState, useEffect } from "react";
 import { Route } from "wouter";
@@ -38,6 +39,9 @@ function App() {
       </Route>
       <Route path="/credits">
         <Credits />
+      </Route>
+      <Route path="/post">
+        <BlogPost post={blogPosts[0]} />
       </Route>
 
       <AppFooter />

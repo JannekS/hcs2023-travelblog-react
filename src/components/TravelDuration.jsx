@@ -4,7 +4,7 @@ function TravelDuration({ startDateStr, endDateStr }) {
   const start = new Date(startDateStr);
   const end = new Date(endDateStr);
   return (
-    <div className="flex flex-row items-center space-x-2">
+    <div className="flex flex-row items-center justify-start space-x-2">
       <CalendarDaysIcon className="w-5 h-5" />
       <p>
         {start.toLocaleDateString("en-GB")} to {end.toLocaleDateString("en-GB")}
