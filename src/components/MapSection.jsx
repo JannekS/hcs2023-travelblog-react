@@ -1,15 +1,11 @@
 import { useState } from "react";
-import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
+import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import LocationMarker from "./LocationMarker";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 function MapSection({ blogPosts, focusLocation }) {
-  const [showPopup, setShowPopup] = useState(false);
-
-  function handleMarkerClick() {
-    setShowPopup(!showPopup);
-  }
   return (
     <section className="sticky top-12 w-full h-[85vh] lg:h-[80vh] lg:w-1/2 px-4 mb-4">
       {focusLocation ? (
@@ -26,26 +22,7 @@ function MapSection({ blogPosts, focusLocation }) {
             scrollZoom={false}
             mapboxAccessToken={MAPBOX_TOKEN}
           >
-            <Marker
-              style={{ cursor: "pointer" }}
-              longitude={focusLocation.lon}
-              latitude={focusLocation.lat}
-              color="orange"
-              onClick={handleMarkerClick}
-            ></Marker>
-            {showPopup && (
-              <Popup
-                longitude={focusLocation.lon}
-                latitude={focusLocation.lat}
-                anchor="bottom"
-                offset={30}
-                closeOnClick={false}
-                className="w-32 p-1 rounded-md"
-                onClose={() => setShowPopup(false)}
-              >
-                You are here
-              </Popup>
-            )}
+            <LocationMarker location={focusLocation} />
             <NavigationControl />
           </Map>
         </div>
