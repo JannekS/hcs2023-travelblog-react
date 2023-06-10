@@ -1,6 +1,7 @@
 import TravelDuration from "../components/TravelDuration";
 import AuthorAvatar from "../components/AuthorAvatar";
 import { MapPinIcon } from "@heroicons/react/24/solid";
+import NotFound from "./NotFound";
 
 function BlogPost({ post }) {
   return post ? (
@@ -41,7 +42,7 @@ function BlogPost({ post }) {
       </div>
     </div>
   ) : (
-    <p>please wait...</p>
+    <NotFound />
   );
 }
 

@@ -8,7 +8,8 @@ import Credits from "./pages/Credits";
 import BlogPost from "./pages/BlogPost";
 
 import { useState, useEffect } from "react";
-import { Route } from "wouter";
+import { Route, Switch } from "wouter";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -25,26 +26,31 @@ function App() {
   return (
     <>
       <AppHeader />
-      <Route path="/">
-        <Home blogPosts={blogPosts} />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/new-post">
-        <NewPost />
-      </Route>
-      <Route path="/contact">
-        <Contact />
-      </Route>
-      <Route path="/credits">
-        <Credits />
-      </Route>
-      <Route path="/post/:id">
-        {(params) => (
-          <BlogPost post={blogPosts.find((post) => post.id == params.id)} />
-        )}
-      </Route>
+      <Switch>
+        <Route path="/">
+          <Home blogPosts={blogPosts} />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/new-post">
+          <NewPost />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/credits">
+          <Credits />
+        </Route>
+        <Route path="/post/:id">
+          {(params) => (
+            <BlogPost post={blogPosts.find((post) => post.id == params.id)} />
+          )}
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
 
       <AppFooter />
     </>
