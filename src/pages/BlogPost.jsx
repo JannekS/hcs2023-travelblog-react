@@ -3,6 +3,8 @@ import AuthorAvatar from "../components/AuthorAvatar";
 import { MapPinIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import NotFound from "./NotFound";
 import { Link } from "wouter";
+import MapComponent from "../components/MapComponent";
+import MapMarker from "../components/MapMarker";
 
 function BlogPost({ post }) {
   return post ? (
@@ -48,6 +50,11 @@ function BlogPost({ post }) {
           >
             home
           </Link>
+        </div>
+        <div className="w-full h-96 mt-4">
+          <MapComponent centerLon={post.lon} centerLat={post.lat} initZoom={7}>
+            <MapMarker lon={post.lon} lat={post.lat} />
+          </MapComponent>
         </div>
       </div>
     </div>
