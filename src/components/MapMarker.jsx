@@ -1,12 +1,12 @@
 import { Marker } from "react-map-gl";
 
-function LocationMarker({ location, onClick }) {
+function MapMarker({ lon, lat, onClick }) {
   return (
     <>
       <Marker
         style={{ cursor: "pointer" }}
-        longitude={location.lon}
-        latitude={location.lat}
+        longitude={lon}
+        latitude={lat}
         color="orange"
         onClick={onClick}
       ></Marker>
@@ -14,4 +14,4 @@ function LocationMarker({ location, onClick }) {
   );
 }
 
-export default LocationMarker;
+export default MapMarker;
