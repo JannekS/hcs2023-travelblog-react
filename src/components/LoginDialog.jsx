@@ -1,10 +1,18 @@
-function LoginDialog() {
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
+function LoginDialog({ onCloseDialog }) {
   function handleSubmit(event) {
     event.preventDefault();
     alert("Login does not work, yet.");
   }
   return (
-    <div className="absolute top-14 right-0 m-4 p-8 rounded-md bg-amber-50/90 backdrop-blur-sm">
+    <div className="absolute top-14 right-0 m-4 p-8 pt-10 rounded-md bg-amber-50/90 backdrop-blur-sm">
+      <button
+        onClick={onCloseDialog}
+        className="absolute top-2 right-2 rounded-full border border-amber-900/60 p-1 bg-amber-100 hover:bg-amber-700 hover:text-amber-50"
+      >
+        <XMarkIcon className="w-5 h-5" />
+      </button>
       <h2 className="text-lg">Login to blog about your journey</h2>
       <form
         action=""

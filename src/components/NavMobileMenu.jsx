@@ -2,7 +2,7 @@ import NavBar from "./NavBar";
 import NavMobileButton from "./NavMobileButton";
 import { useState } from "react";
 
-function NavMobileMenu() {
+function NavMobileMenu({ onLoginClick }) {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ function NavMobileMenu() {
           !showMenu && "hidden"
         } absolute top-14 right-0 py-4 px-8 bg-amber-300/90 rounded-b-md`}
       >
-        <NavBar />
+        <NavBar onLoginClick={onLoginClick} />
       </div>
     </>
   );

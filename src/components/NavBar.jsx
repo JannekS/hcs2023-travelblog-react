@@ -4,7 +4,7 @@ import {
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 
-function NavBar() {
+function NavBar({ onLoginClick }) {
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 md:gap-3 list-none">
       <li>
@@ -32,7 +32,10 @@ function NavBar() {
           New Post
         </Link>
       </li>
-      <button className="flex flex-row items-center gap-1 px-2 py-1 border border-orange-800 rounded-md  hover:bg-amber-700 hover:text-orange-50">
+      <button
+        onClick={onLoginClick}
+        className="flex flex-row items-center gap-1 px-2 py-1 border border-orange-800 rounded-md  hover:bg-amber-700 hover:text-orange-50"
+      >
         <ArrowRightOnRectangleIcon className="h-5 w-5" /> Login
       </button>
     </nav>
