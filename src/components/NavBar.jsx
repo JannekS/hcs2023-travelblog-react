@@ -3,8 +3,11 @@ import {
   ArrowRightOnRectangleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
+import useStore from "../stores/store";
 
-function NavBar({ onLoginClick }) {
+function NavBar() {
+  const toggleLoginDialog = useStore((state) => state.toggleLoginDialog);
+
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 md:gap-3 list-none">
       <li>
@@ -33,7 +36,7 @@ function NavBar({ onLoginClick }) {
         </Link>
       </li>
       <button
-        onClick={onLoginClick}
+        onClick={toggleLoginDialog}
         className="flex flex-row items-center gap-1 px-2 py-1 border border-orange-800 rounded-md  hover:bg-amber-700 hover:text-orange-50"
       >
         <ArrowRightOnRectangleIcon className="h-5 w-5" /> Login
