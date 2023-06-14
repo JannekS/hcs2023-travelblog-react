@@ -9,7 +9,7 @@ import MapMarker from "../components/MapMarker";
 function BlogPost({ post }) {
   return post ? (
     <div className="w-full">
-      <div className="max-w-3xl mx-auto p-4 md:px-6 bg-orange-50">
+      <div className="max-w-3xl mx-auto p-4  md:px-8 md:pb-8 bg-amber-50 shadow-md">
         <h1 className="mt-4 mb-6 font-bold font-title text-4xl md:text-5xl text-orange-950">
           {post.title}
         </h1>
@@ -46,7 +46,7 @@ function BlogPost({ post }) {
           <ArrowLeftIcon className="w-5 h-5" />
           <Link
             href="/"
-            className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 hover:decoration-orange-800/80"
+            className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2"
           >
             home
           </Link>
