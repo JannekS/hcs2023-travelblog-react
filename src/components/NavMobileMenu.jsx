@@ -14,7 +14,7 @@ function NavMobileMenu() {
         <div
           className={`${
             !showMenu && "hidden"
-          } absolute top-14 right-0 py-4 px-8 bg-amber-300/90 rounded-b-md`}
+          } absolute top-14 right-0 py-4 px-8 bg-amber-200/90 backdrop-blur-sm rounded-b-md`}
         >
           <NavBar />
         </div>

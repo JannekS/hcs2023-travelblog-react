@@ -13,7 +13,7 @@ function NavBar() {
       <li>
         <Link
           href="/"
-          className="hover:underline hover:underline-offset-4 decoration-2 decoration-orange-800/60"
+          className="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
           Home
         </Link>
@@ -21,7 +21,7 @@ function NavBar() {
       <li>
         <Link
           href="/about"
-          className="hover:underline hover:underline-offset-4 decoration-2 decoration-orange-800/60"
+          className="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
           About
         </Link>
@@ -29,7 +29,7 @@ function NavBar() {
       <li>
         <Link
           href="/new-post"
-          className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-orange-800/60"
+          className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
           <PencilSquareIcon className="h-5 w-5" />
           New Post
@@ -37,7 +37,7 @@ function NavBar() {
       </li>
       <button
         onClick={toggleLoginDialog}
-        className="flex flex-row items-center gap-1 px-2 py-1 border border-orange-800 rounded-md  hover:bg-amber-700 hover:text-orange-50"
+        className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
       >
         <ArrowRightOnRectangleIcon className="h-5 w-5" /> Login
       </button>

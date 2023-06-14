@@ -33,7 +33,7 @@ function MapPopup({ postData, handleClose }) {
           />
           <Link
             href={`/post/${postData.id}`}
-            className="underline underline-offset-4 decoration-2 decoration-orange-800/60 hover:decoration-4 hover:underline-offset-2 focus:outline-none hover:decoration-orange-800/80"
+            className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2 focus:outline-none"
           >
             Read more
           </Link>
