@@ -26,10 +26,15 @@ function App() {
   }, []);
 
   async function getPosts() {
-    const { data, error } = await supabase.from("blogposts").select(`id,
+    const { data, error } = await supabase
+      .from("blogposts")
+      .select(
+        `id,
       title, text, imageUrl, startDate, endDate,
       locations (location, country, lon, lat),
-      authors (name, avatarUrl)`);
+      authors (name, avatarUrl)`
+      )
+      .order("startDate", { ascending: false });
     setBlogPosts(data);
     if (error) {
       console.log(error);
