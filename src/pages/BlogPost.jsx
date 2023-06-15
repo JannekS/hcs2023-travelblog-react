@@ -18,7 +18,7 @@ function BlogPost({ post }) {
             <div className="flex flex-row items-center space-x-2">
               <MapPinIcon className="w-5 h-5" />
               <p>
-                {post.location}, {post.country}
+                {post.locations.location}, {post.locations.country}
               </p>
             </div>
             <TravelDuration
@@ -27,16 +27,16 @@ function BlogPost({ post }) {
             />
           </div>
           <AuthorAvatar
-            id={post.authorId}
-            image={post.authorImg}
-            name={post.authorName}
+            id={post.authors.name}
+            image={post.authors.avatarUrl}
+            name={post.authors.name}
           />
         </div>
 
         <div className="relative w-full h-68 md:h-96 rounded-t-md">
           {/*TODO: maybe center the image */}
           <img
-            src={post.imageSrc}
+            src={post.imageUrl}
             alt=""
             className="w-full h-68 md:h-96 object-cover object-center overflow-hidden rounded-md"
           />
@@ -52,8 +52,12 @@ function BlogPost({ post }) {
           </Link>
         </div>
         <div className="w-full h-96 mt-4">
-          <MapComponent centerLon={post.lon} centerLat={post.lat} initZoom={7}>
-            <MapMarker lon={post.lon} lat={post.lat} />
+          <MapComponent
+            centerLon={post.locations.lon}
+            centerLat={post.locations.lat}
+            initZoom={7}
+          >
+            <MapMarker lon={post.locations.lon} lat={post.locations.lat} />
           </MapComponent>
         </div>
       </div>

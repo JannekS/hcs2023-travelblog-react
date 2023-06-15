@@ -9,7 +9,7 @@ function PreviewCard({ blogPost }) {
       <div className="relative w-full h-64 rounded-t-md">
         {/*TODO: maybe center the image */}
         <img
-          src={blogPost.imageSrc}
+          src={blogPost.imageUrl}
           alt=""
           className="w-full h-64 object-cover overflow-hidden rounded-t-md"
         />
@@ -17,7 +17,7 @@ function PreviewCard({ blogPost }) {
           <div className="flex flex-row items-center space-x-1">
             <MapPinIcon className="w-5 h-5" />
             <p>
-              {blogPost.location}, {blogPost.country}
+              {blogPost.locations.location}, {blogPost.locations.country}
             </p>
           </div>
         </div>
@@ -36,9 +36,9 @@ function PreviewCard({ blogPost }) {
         <p className="line-clamp-3 my-4">{blogPost.text}</p>
         <div className="flex flex-row items-center justify-between">
           <AuthorAvatar
-            id={blogPost.authorId}
-            image={blogPost.authorImg}
-            name={blogPost.authorName}
+            id={blogPost.authors.name}
+            image={blogPost.authors.avatarUrl}
+            name={blogPost.authors.name}
           />
           <Link
             href={`/post/${blogPost.id}`}

@@ -19,14 +19,14 @@ function MapSection({ blogPosts, focusLocation }) {
       {focusLocation ? (
         <div className="mt-0 lg:mt-6 pt-2 lg:pt-0 rounded-md h-[85vh] lg:h-[80vh]">
           <MapComponent
-            centerLon={focusLocation.lon}
-            centerLat={focusLocation.lat}
+            centerLon={focusLocation.locations.lon}
+            centerLat={focusLocation.locations.lat}
             initZoom={2}
           >
             {blogPosts.map((post) => (
               <MapMarker
-                lon={post.lon}
-                lat={post.lat}
+                lon={post.locations.lon}
+                lat={post.locations.lat}
                 key={post.id}
                 onClick={() => handleMarkerClick(post.id)}
               />

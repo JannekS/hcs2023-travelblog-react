@@ -7,21 +7,33 @@ import Contact from "./pages/Contact";
 import Credits from "./pages/Credits";
 import BlogPost from "./pages/BlogPost";
 import ScrollToTop from "./utils/ScrollToTop";
+import { createClient } from "@supabase/supabase-js";
 
 import { useState, useEffect } from "react";
 import { Router, Route, Switch } from "wouter";
 import NotFound from "./pages/NotFound";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_KEY = import.meta.env.VITE_SERVER_KEY;
+
+const supabase = createClient(SERVER_URL, SERVER_KEY);
+
 function App() {
   const [blogPosts, setBlogPosts] = useState([]);
+
   useEffect(() => {
-    getPosts("/blogposts.json");
+    getPosts();
   }, []);
 
-  async function getPosts(url) {
-    const res = await fetch(url);
-    const blogPostData = await res.json();
-    setBlogPosts(blogPostData);
+  async function getPosts() {
+    const { data, error } = await supabase.from("blogposts").select(`id,
+      title, text, imageUrl, startDate, endDate,
+      locations (location, country, lon, lat),
+      authors (name, avatarUrl)`);
+    setBlogPosts(data);
+    if (error) {
+      console.log(error);
+    }
   }
 
   ScrollToTop();

@@ -6,8 +6,8 @@ import { Link } from "wouter";
 function MapPopup({ postData, handleClose }) {
   return (
     <Popup
-      longitude={postData.lon}
-      latitude={postData.lat}
+      longitude={postData.locations.lon}
+      latitude={postData.locations.lat}
       anchor="bottom"
       offset={30}
       focusAfterOpen={false}
@@ -26,9 +26,9 @@ function MapPopup({ postData, handleClose }) {
         />
         <div className="flex flex-row justify-between items-center">
           <AuthorAvatar
-            id={postData.authorId}
-            image={postData.authorImg}
-            name={postData.authorName}
+            id={postData.authors.name}
+            image={postData.authors.avatarUrl}
+            name={postData.authors.name}
             size="sm"
           />
           <Link
