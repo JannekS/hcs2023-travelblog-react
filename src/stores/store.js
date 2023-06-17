@@ -22,6 +22,7 @@ const useStore = create((set) => ({
     set({ loading: false });
   },
   getDetailPost: async (postId) => {
+    set({ detailPost: null });
     set({ loading: true });
     const { data, error } = await supabase
       .from("blogposts")
