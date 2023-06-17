@@ -3,10 +3,10 @@ import {
   ArrowRightOnRectangleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
-import useStore from "../stores/store";
+// import useStore from "../stores/store";
 
 function NavBar() {
-  const toggleLoginDialog = useStore((state) => state.toggleLoginDialog);
+  // const toggleLoginDialog = useStore((state) => state.toggleLoginDialog);
 
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 md:gap-3 list-none">
@@ -35,12 +35,15 @@ function NavBar() {
           New Post
         </Link>
       </li>
-      <button
-        onClick={toggleLoginDialog}
-        className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
-      >
-        <ArrowRightOnRectangleIcon className="h-5 w-5" /> Login
-      </button>
+      <li>
+        <Link
+          href="/login"
+          className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+        >
+          <ArrowRightOnRectangleIcon className="h-5 w-5" />
+          Login
+        </Link>
+      </li>
     </nav>
   );
 }
