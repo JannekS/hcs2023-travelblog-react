@@ -1,20 +1,23 @@
 import useStore from "../stores/store";
-import { useState } from "react";
-import supabase from "../utils/supabaseClient";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, isAuthenticated] = useStore((state) => [
+    state.login,
+    state.isAuthenticated,
+  ]);
   const [location, setLocation] = useLocation();
 
-  async function handleLogin(event) {
+  useEffect(() => {
+    isAuthenticated && setLocation("/profile");
+  }, [isAuthenticated]);
+
+  function handleLogin(event) {
     event.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    data.user && setLocation("/profile");
+    login(email, password);
   }
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -31,6 +34,7 @@ function Login() {
               type="email"
               name="email"
               value={email}
+              required={true}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="jane@example.com"
               className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
@@ -42,6 +46,7 @@ function Login() {
               type="password"
               name="password"
               value={password}
+              required={true}
               onChange={(e) => setPassword(e.target.value)}
               className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
             />

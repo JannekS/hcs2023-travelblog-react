@@ -40,7 +40,16 @@ const useStore = create((set) => ({
     }
     set({ loading: false });
   },
+  isAuthenticated: false,
+  login: async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    data.user && set({ isAuthenticated: true });
+  },
 
+  logout: async () => {},
   loading: false,
   showMobileMenu: false,
   toggleMobileMenu: () => {
