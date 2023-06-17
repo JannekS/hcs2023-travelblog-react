@@ -1,4 +1,3 @@
-import LoginDialog from "./LoginDialog";
 import NavBar from "./NavBar";
 import NavMobileMenu from "./NavMobileMenu";
 import { Link } from "wouter";
@@ -25,7 +24,6 @@ function AppHeader() {
       <div className="hidden md:flex">
         <NavBar />
       </div>
-      <LoginDialog />
     </header>
   );
 }
