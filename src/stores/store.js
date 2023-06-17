@@ -40,13 +40,15 @@ const useStore = create((set) => ({
     }
     set({ loading: false });
   },
+
   loading: false,
-  showLoginDialog: false,
-  toggleLoginDialog: () => {
-    set((state) => ({ showLoginDialog: !state.showLoginDialog }));
+  showMobileMenu: false,
+  toggleMobileMenu: () => {
+    set((state) => ({ showMobileMenu: !state.showMobileMenu }));
+  },
+  closeMobileMenu: () => {
     set({ showMobileMenu: false });
   },
-  closeLoginDialog: () => set({ showLoginDialog: false }),
 }));
 
 export default useStore;

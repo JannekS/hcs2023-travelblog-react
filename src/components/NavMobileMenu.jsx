@@ -1,24 +1,23 @@
 import NavBar from "./NavBar";
 import NavMobileButton from "./NavMobileButton";
-import { useState } from "react";
 import useStore from "../stores/store";
 
 function NavMobileMenu() {
-  const [showMenu, setShowMenu] = useState(false);
-  const showLoginDialog = useStore((state) => state.showLoginDialog);
+  const [showMenu, toggleMenu] = useStore((state) => [
+    state.showMobileMenu,
+    state.toggleMobileMenu,
+  ]);
 
   return (
     <>
-      <NavMobileButton toggleMenu={() => setShowMenu(!showMenu)} />
-      {!showLoginDialog && (
-        <div
-          className={`${
-            !showMenu && "hidden"
-          } absolute top-14 right-0 py-4 px-8 bg-amber-200/90 backdrop-blur-sm rounded-b-md`}
-        >
-          <NavBar />
-        </div>
-      )}
+      <NavMobileButton toggleMenu={() => toggleMenu} />
+      <div
+        className={`${
+          !showMenu && "hidden"
+        } absolute top-14 right-0 py-4 px-8 bg-amber-200/90 backdrop-blur-sm rounded-b-md`}
+      >
+        <NavBar />
+      </div>
     </>
   );
 }
