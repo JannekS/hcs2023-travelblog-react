@@ -11,13 +11,16 @@ import ScrollToTop from "./utils/ScrollToTop";
 import useStore from "./stores/store";
 
 import { useEffect } from "react";
-import { Router, Route, Switch } from "wouter";
+import { Router, Route, Switch, Redirect } from "wouter";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 
 function App() {
   // const [blogPosts, setBlogPosts] = useState([]);
-  const getPosts = useStore((state) => state.getPosts);
+  const [getPosts, isAuthenticated] = useStore((state) => [
+    state.getPosts,
+    state.isAuthenticated,
+  ]);
 
   useEffect(() => {
     getPosts();
@@ -38,9 +41,11 @@ function App() {
             <About />
           </Route>
           <Route path="/new-post">
+            {!isAuthenticated && <Redirect to={"/login"} />}
             <NewPost />
           </Route>
           <Route path="/login">
+            {isAuthenticated && <Redirect to={"/profile"} />}
             <Login />
           </Route>
           <Route path="/contact">
@@ -50,6 +55,7 @@ function App() {
             <Credits />
           </Route>
           <Route path="/profile">
+            {!isAuthenticated && <Redirect to={"/login"} />}
             <Profile />
           </Route>
           <Route path="/post/:id">
