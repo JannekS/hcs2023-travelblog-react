@@ -3,6 +3,7 @@ import {
   ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
   PencilSquareIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import useStore from "../stores/store";
 
@@ -30,15 +31,28 @@ function NavBar() {
           About
         </Link>
       </li>
-      <li>
-        <Link
-          href="/new-post"
-          className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
-        >
-          <PencilSquareIcon className="h-5 w-5" />
-          New Post
-        </Link>
-      </li>
+      {isAuthenticated && (
+        <>
+          <li>
+            <Link
+              href="/new-post"
+              className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+            >
+              <PencilSquareIcon className="h-5 w-5" />
+              New Post
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/profile"
+              className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+            >
+              <UserCircleIcon className="h-5 w-5" />
+              Profile
+            </Link>
+          </li>
+        </>
+      )}
       <li>
         {isAuthenticated ? (
           <button
