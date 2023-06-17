@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import supabase from "../utils/supabaseClient";
 
-const useStore = create((set) => ({
+const useStore = create((set, get) => ({
   blogPosts: null,
   detailPost: null,
   getPosts: async () => {
@@ -41,15 +41,29 @@ const useStore = create((set) => ({
     set({ loading: false });
   },
   isAuthenticated: false,
+  userId: null,
+  refreshAuth: async () => {
+    const { data, error } = await supabase.auth.getSession();
+    if (data.session) {
+      console.log(data);
+      set({ isAuthenticated: true });
+      set({ userId: data.session.user.id });
+    } else {
+      set({ isAuthenticated: false });
+      set({ userId: null });
+    }
+  },
   login: async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
-    data.user && set({ isAuthenticated: true });
+    await get().refreshAuth();
   },
-
-  logout: async () => {},
+  logout: async () => {
+    const { error } = await supabase.auth.signOut();
+    await get().refreshAuth();
+  },
   loading: false,
   showMobileMenu: false,
   toggleMobileMenu: () => {

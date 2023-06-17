@@ -17,13 +17,15 @@ import Profile from "./pages/Profile";
 
 function App() {
   // const [blogPosts, setBlogPosts] = useState([]);
-  const [getPosts, isAuthenticated] = useStore((state) => [
+  const [getPosts, isAuthenticated, refreshAuth] = useStore((state) => [
     state.getPosts,
     state.isAuthenticated,
+    state.refreshAuth,
   ]);
 
   useEffect(() => {
     getPosts();
+    refreshAuth();
   }, []);
 
   ScrollToTop();

@@ -1,12 +1,16 @@
 import { Link } from "wouter";
 import {
   ArrowRightOnRectangleIcon,
+  ArrowLeftOnRectangleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
-// import useStore from "../stores/store";
+import useStore from "../stores/store";
 
 function NavBar() {
-  // const toggleLoginDialog = useStore((state) => state.toggleLoginDialog);
+  const [isAuthenticated, logout] = useStore((state) => [
+    state.isAuthenticated,
+    state.logout,
+  ]);
 
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 md:gap-3 list-none">
@@ -36,13 +40,23 @@ function NavBar() {
         </Link>
       </li>
       <li>
-        <Link
-          href="/login"
-          className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
-        >
-          <ArrowRightOnRectangleIcon className="h-5 w-5" />
-          Login
-        </Link>
+        {isAuthenticated ? (
+          <button
+            onClick={() => logout()}
+            className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+          >
+            <ArrowLeftOnRectangleIcon className="h-5 w-5" />
+            Logout
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+          >
+            <ArrowRightOnRectangleIcon className="h-5 w-5" />
+            Login
+          </Link>
+        )}
       </li>
     </nav>
   );
