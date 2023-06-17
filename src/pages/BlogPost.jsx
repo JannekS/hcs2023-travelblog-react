@@ -5,8 +5,18 @@ import NotFound from "./NotFound";
 import { Link } from "wouter";
 import MapComponent from "../components/MapComponent";
 import MapMarker from "../components/MapMarker";
+import { useEffect } from "react";
+import useStore from "../stores/store";
 
-function BlogPost({ post }) {
+function BlogPost({ postId }) {
+  const [post, getDetailPost] = useStore((state) => [
+    state.detailPost,
+    state.getDetailPost,
+  ]);
+  useEffect(() => {
+    getDetailPost(postId);
+  }, []);
+
   return post ? (
     <div className="w-full">
       <div className="max-w-3xl mx-auto p-4  md:px-8 md:pb-8 bg-amber-50 shadow-md">
