@@ -40,8 +40,49 @@ const useStore = create((set, get) => ({
     }
     set({ loading: false });
   },
+  getUserPosts: async (userId) => {
+    set({ userPosts: null });
+    const { data, error } = await supabase
+      .from("blogposts")
+      .select(
+        // TODO: refactor this
+        `id,
+      title, text, imageUrl, startDate, endDate,
+      locations (location, country, lon, lat),
+      authors (name, avatarUrl)`
+      )
+      .eq("author_id", userId)
+      .order("startDate", { ascending: false });
+    set({ userPosts: data });
+    if (error) {
+      console.log(error);
+    }
+  },
+  getUserData: async () => {
+    set({ loading: true });
+    await get().refreshAuth;
+    const {
+      data: {
+        user: { id },
+      },
+    } = await supabase.auth.getUser();
+    const { data, error } = await supabase
+      .from("authors")
+      .select()
+      .eq("id", id);
+    error && console.log(error);
+    set({ userName: data[0].name });
+    set({ avatarUrl: data[0].avatarUrl });
+    set({ userDescription: data[0].description });
+    get().getUserPosts(id);
+    set({ loading: false });
+  },
   isAuthenticated: false,
   userId: null,
+  userName: null,
+  userDescription: null,
+  avatarUrl: null,
+  userPosts: null,
   refreshAuth: async () => {
     const { data, error } = await supabase.auth.getSession();
     if (data.session) {
@@ -53,7 +94,7 @@ const useStore = create((set, get) => ({
     }
   },
   login: async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
