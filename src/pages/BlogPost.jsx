@@ -19,7 +19,7 @@ function BlogPost({ postId }) {
 
   return post ? (
     <div className="w-full">
-      <div className="max-w-3xl mx-auto p-4  md:px-8 md:pb-8 bg-amber-50 shadow-md">
+      <div className="max-w-3xl mx-auto p-4  md:px-8 md:pb-8 bg-amber-50 rounded-b-md shadow-md">
         <h1 className="mt-4 mb-6 font-bold font-title text-4xl md:text-5xl text-orange-950">
           {post.title}
         </h1>

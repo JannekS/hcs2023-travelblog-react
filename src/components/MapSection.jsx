@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MapMarker from "./MapMarker";
 import MapPopup from "./MapPopup";
 import MapComponent from "./MapComponent";
@@ -6,8 +6,27 @@ import MapComponent from "./MapComponent";
 function MapSection({ blogPosts, focusLocation }) {
   const [showPopup, setShowPopup] = useState(false);
   const [chosenLocation, setChosenLocation] = useState();
+  const [mapHeightOffset, setMapHeightOffest] = useState("108px"); //156px or
 
-  // TODO: refactor this
+  useEffect(() => {
+    window.addEventListener("scroll", adjustMapSize);
+    return () => {
+      window.removeEventListener("scroll", adjustMapSize);
+    };
+  }, []);
+
+  function adjustMapSize() {
+    if (
+      window.scrollY >=
+      window.document.body.scrollHeight - window.innerHeight - 48
+    ) {
+      mapHeightOffset === "108px" && setMapHeightOffest("156px");
+    } else {
+      setMapHeightOffest("108px");
+    }
+  }
+
+  // TODO: refactor this & use easeTo flyTo moveTo --> we need useMap hook for that: const {current: map} = useMap();
   function handleMarkerClick(id) {
     chosenLocation && showPopup && chosenLocation.id === id
       ? setShowPopup(false)
@@ -15,9 +34,11 @@ function MapSection({ blogPosts, focusLocation }) {
     setChosenLocation(blogPosts.find((post) => post.id === id));
   }
   return (
-    <section className="sticky top-12 w-full h-[85vh] lg:h-[80vh] lg:w-1/2 px-4 mb-4">
+    <section className="w-full lg:w-1/2 p-4">
       {focusLocation ? (
-        <div className="mt-0 lg:mt-6 pt-2 lg:pt-0 rounded-md h-[85vh] lg:h-[80vh]">
+        <div
+          className={`sticky top-20 mt-14 rounded-md h-[80vh] md:h-[calc(100vh-${mapHeightOffset})]`}
+        >
           <MapComponent
             centerLon={focusLocation.locations.lon}
             centerLat={focusLocation.locations.lat}

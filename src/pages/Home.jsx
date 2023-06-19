@@ -11,7 +11,7 @@ function Home() {
   ]);
 
   return (
-    <main className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col h-full w-full">
       <HeroSection />
       {loading ? (
         <p>please wait...</p>
@@ -23,7 +23,7 @@ function Home() {
           </div>
         )
       )}
-    </main>
+    </div>
   );
 }
 

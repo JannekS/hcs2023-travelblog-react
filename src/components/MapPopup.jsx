@@ -8,7 +8,6 @@ function MapPopup({ postData, handleClose }) {
     <Popup
       longitude={postData.locations.lon}
       latitude={postData.locations.lat}
-      anchor="bottom"
       offset={30}
       focusAfterOpen={false}
       closeOnClick={false}
