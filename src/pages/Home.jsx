@@ -1,4 +1,5 @@
 import HeroSection from "../components/HeroSection";
+import Loading from "../components/Loading";
 import MapSection from "../components/MapSection";
 import PostPreviewSection from "../components/PostPreviewSection";
 import useStore from "../stores/store";
@@ -14,7 +15,7 @@ function Home() {
     <div className="flex flex-col h-full w-full">
       <HeroSection />
       {loading ? (
-        <p>please wait...</p>
+        <Loading />
       ) : (
         blogPosts && (
           <div className="flex flex-col lg:flex-row min-h-screen w-full">

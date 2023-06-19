@@ -5,6 +5,7 @@ import PostEditCard from "../components/PostEditCard";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PencilIcon } from "@heroicons/react/24/outline";
+import Loading from "../components/Loading";
 
 function Profile() {
   const [
@@ -58,9 +59,9 @@ function Profile() {
   return (
     <>
       {loading && !userPosts ? (
-        <p>please wait...</p>
+        <Loading />
       ) : (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full min-h-screen">
           <h1 className="m-4 font-bold font-title text-4xl text-center">
             Hi {userName} :-)
           </h1>
