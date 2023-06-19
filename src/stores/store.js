@@ -104,6 +104,34 @@ const useStore = create((set, get) => ({
     const { error } = await supabase.auth.signOut();
     await get().refreshAuth();
   },
+  updateUserData: async (formData) => {
+    let imageUrl = await get().avatarUrl;
+    const userId = await get().userId;
+    if (formData.image[0]) {
+      const fileExt = formData.image[0].name.split(".").pop();
+      const fileName = `${Math.random()}-${formData.name}.${fileExt}`;
+      const { error: fileuploadErr } = await supabase.storage
+        .from("avatars")
+        .upload(fileName, formData.image[0]);
+      fileuploadErr && console.log(fileuploadErr);
+      const { data: urlData } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(fileName);
+      imageUrl = urlData.publicUrl;
+    }
+    const { data, error } = await supabase
+      .from("authors")
+      .update({
+        name: formData.name,
+        avatarUrl: imageUrl,
+        description: formData.description,
+      })
+      .eq("id", userId)
+      .select();
+    console.log(data);
+    error && console.log(error);
+    await get().getUserData;
+  },
   createNewPost: async (formData) => {
     const fileName = `${Math.random()}-${formData.image[0].name}`;
     const { error: fileuploadErr } = await supabase.storage
