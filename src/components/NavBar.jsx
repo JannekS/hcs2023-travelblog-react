@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import {
   ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
@@ -6,70 +5,76 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import useStore from "../stores/store";
+import LinkWrapper from "./LinkWrapper";
 
 function NavBar() {
-  const [isAuthenticated, logout] = useStore((state) => [
+  const [isAuthenticated, logout, closeMobileMenu] = useStore((state) => [
     state.isAuthenticated,
     state.logout,
+    state.closeMobileMenu,
   ]);
+  function handleLogout() {
+    logout();
+    closeMobileMenu();
+  }
 
   return (
     <nav className="flex flex-col md:flex-row items-center gap-2 md:gap-3 list-none">
       <li>
-        <Link
+        <LinkWrapper
           href="/"
-          className="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+          classes="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
           Home
-        </Link>
+        </LinkWrapper>
       </li>
       <li>
-        <Link
+        <LinkWrapper
           href="/about"
-          className="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+          classes="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
           About
-        </Link>
+        </LinkWrapper>
       </li>
       {isAuthenticated && (
         <>
           <li>
-            <Link
+            <LinkWrapper
               href="/new-post"
-              className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+              classes="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
             >
               <PencilSquareIcon className="h-5 w-5" />
               New Post
-            </Link>
+            </LinkWrapper>
           </li>
           <li>
-            <Link
+            <LinkWrapper
               href="/profile"
-              className="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+              classes="flex flex-row items-center gap-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
             >
               <UserCircleIcon className="h-5 w-5" />
               Profile
-            </Link>
+            </LinkWrapper>
           </li>
         </>
       )}
       <li>
         {isAuthenticated ? (
           <button
-            onClick={() => logout()}
+            onClick={handleLogout}
             className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
           >
             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
             Logout
           </button>
         ) : (
-          <Link
+          <LinkWrapper
             href="/login"
-            className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+            classes="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
           >
             <ArrowRightOnRectangleIcon className="h-5 w-5" />
             Login
-          </Link>
+          </LinkWrapper>
         )}
       </li>
     </nav>

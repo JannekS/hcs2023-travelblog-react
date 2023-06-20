@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import useStore from "../stores/store";
 import { useState, useEffect } from "react";
+import Loading from "../components/Loading";
 
 function NewPost() {
   const {
@@ -47,7 +48,7 @@ function NewPost() {
   return (
     <>
       {loading ? (
-        <loading />
+        <Loading />
       ) : (
         <div className="flex flex-col items-center w-full mb-8">
           <h1 className="m-4 font-bold font-title text-4xl text-center">

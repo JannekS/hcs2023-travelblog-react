@@ -1,7 +1,7 @@
 import { Popup } from "react-map-gl";
 import TravelDuration from "./TravelDuration";
 import AuthorAvatar from "./AuthorAvatar";
-import { Link } from "wouter";
+import LinkWrapper from "./LinkWrapper";
 
 function MapPopup({ postData, handleClose }) {
   return (
@@ -30,12 +30,7 @@ function MapPopup({ postData, handleClose }) {
             name={postData.authors.name}
             size="sm"
           />
-          <Link
-            href={`/post/${postData.id}`}
-            className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2 focus:outline-none"
-          >
-            Read more
-          </Link>
+          <LinkWrapper href={`/post/${postData.id}`}>Read Post</LinkWrapper>
         </div>
       </div>
     </Popup>

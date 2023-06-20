@@ -1,7 +1,7 @@
-import { Link } from "wouter";
 import { MapPinIcon } from "@heroicons/react/24/solid";
 import AuthorAvatar from "./AuthorAvatar";
 import TravelDuration from "./TravelDuration";
+import LinkWrapper from "./LinkWrapper";
 
 function PreviewCard({ blogPost }) {
   return (
@@ -26,7 +26,9 @@ function PreviewCard({ blogPost }) {
         <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70">
           {" "}
           {/*TODO: Make inline-block work with line-clamp*/}
-          <Link href={`/post/${blogPost.id}`}>{blogPost.title}</Link>
+          <LinkWrapper href={`/post/${blogPost.id}`} classes="border-none">
+            {blogPost.title}
+          </LinkWrapper>
         </h3>
 
         <TravelDuration
@@ -40,12 +42,7 @@ function PreviewCard({ blogPost }) {
             image={blogPost.authors.avatarUrl}
             name={blogPost.authors.name}
           />
-          <Link
-            href={`/post/${blogPost.id}`}
-            className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2"
-          >
-            Read more
-          </Link>
+          <LinkWrapper href={`/post/${blogPost.id}`}>Read Post</LinkWrapper>
         </div>
       </div>
     </div>

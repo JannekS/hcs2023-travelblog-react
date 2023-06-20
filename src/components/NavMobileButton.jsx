@@ -1,10 +1,9 @@
-import { useState } from "react";
+import useStore from "../stores/store";
 
 function NavMobileButton({ toggleMenu }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useStore((state) => state.showMobileMenu);
 
   function handleClick() {
-    setIsOpen(!isOpen);
     toggleMenu();
   }
 

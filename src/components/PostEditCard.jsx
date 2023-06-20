@@ -1,6 +1,6 @@
-import { Link } from "wouter";
 import { MapPinIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import TravelDuration from "./TravelDuration";
+import LinkWrapper from "./LinkWrapper";
 
 function PostEditCard({ blogPost }) {
   return (
@@ -20,12 +20,7 @@ function PostEditCard({ blogPost }) {
         endDateStr={blogPost.endDate}
       />
       <div className="flex flex-row items-center justify-between">
-        <Link
-          href={`/post/${blogPost.id}`}
-          className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2"
-        >
-          Read Post
-        </Link>
+        <LinkWrapper href={`/post/${blogPost.id}`}>Read Post</LinkWrapper>
         <div className="flex flex-row items-center gap-2">
           <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100">
             <PencilIcon className="w-4 h-4" /> <span>Edit</span>

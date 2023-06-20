@@ -2,12 +2,12 @@ import TravelDuration from "../components/TravelDuration";
 import AuthorAvatar from "../components/AuthorAvatar";
 import { MapPinIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import NotFound from "./NotFound";
-import { Link } from "wouter";
 import MapComponent from "../components/MapComponent";
 import MapMarker from "../components/MapMarker";
 import { useEffect } from "react";
 import useStore from "../stores/store";
 import Loading from "../components/Loading";
+import LinkWrapper from "../components/LinkWrapper";
 
 function BlogPost({ postId }) {
   const [post, getDetailPost, loading] = useStore((state) => [
@@ -58,12 +58,7 @@ function BlogPost({ postId }) {
             <article className="prose max-w-3xl my-4">{post.text}</article>
             <div className="lg:fixed lg:left-2 lg:top-16 flex flex-row items-center justify-end space-x-1">
               <ArrowLeftIcon className="w-5 h-5" />
-              <Link
-                href="/"
-                className="underline underline-offset-4 decoration-2 decoration-cyan-700/70 hover:decoration-4 hover:underline-offset-2"
-              >
-                home
-              </Link>
+              <LinkWrapper href="/">home</LinkWrapper>
             </div>
             <div className="w-full h-96 mt-4">
               <MapComponent
