@@ -1,37 +1,43 @@
 import useStore from "../stores/store";
-import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useLocation } from "wouter";
 import Loading from "../components/Loading";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [login, isAuthenticated, loading] = useStore((state) => [
+  const [login, isAuthenticated, loading, loginErr] = useStore((state) => [
     state.login,
     state.isAuthenticated,
     state.loading,
+    state.loginErr,
   ]);
   const [location, setLocation] = useLocation();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     isAuthenticated && setLocation("/profile");
   }, [isAuthenticated]);
 
-  function handleLogin(event) {
-    event.preventDefault();
-    login(email, password);
+  function onSubmit(data) {
+    login(data.email, data.password);
   }
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-col items-center justify-center h-screen">
-          <div className="m-4 p-8 pt-10 rounded-md bg-amber-50/90 backdrop-blur-sm">
+        <div className="flex flex-col items-center justify-center h-[calc(100vh-116px)]">
+          <div className="m-4 p-8 pt-10 rounded-md bg-amber-50 border shadow-md">
             <h2 className="text-lg">Login to blog about your journey</h2>
             <form
               action=""
-              onSubmit={handleLogin}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4 mt-4"
             >
               <div className="flex flex-col gap-1 text-sm">
@@ -39,27 +45,47 @@ function Login() {
                 <input
                   type="email"
                   name="email"
-                  value={email}
+                  {...register("email", {
+                    required: true,
+                    pattern:
+                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  })}
                   required={true}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="jane@example.com"
                   className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
                 />
+                {errors.email && (
+                  <p className="text-sm text-rose-700">
+                    Enter your email to login.
+                  </p>
+                )}
               </div>
+
               <div className="flex flex-col gap-1 text-sm">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   name="password"
-                  value={password}
+                  {...register("password", { required: true, minLength: 12 })}
+                  placeholder="yourSuperS3curePassw0rd"
                   required={true}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className={`rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1`}
                 />
+                {errors.password && (
+                  <p className="text-sm text-rose-700">
+                    Enter your password to login.
+                  </p>
+                )}
               </div>
-
+              {loginErr && (
+                <div className="flex flex-row items-center gap-1 p-1 text-rose-700">
+                  <ExclamationTriangleIcon className="w-5 h-5" />
+                  <span>{loginErr}</span>
+                </div>
+              )}
               <button
                 type="sumbit"
+                disabled={loading}
                 className="rounded-md border p-1 bg-cyan-600 border-cyan-700 hover:bg-cyan-700 hover:text-amber-50"
               >
                 Login

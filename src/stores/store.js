@@ -68,6 +68,7 @@ const useStore = create((set, get) => ({
   userPosts: null,
   loading: false,
   showMobileMenu: false,
+  loginErr: null,
 
   getPosts: async () => {
     set({ loading: true });
@@ -164,6 +165,7 @@ const useStore = create((set, get) => ({
       email: email,
       password: password,
     });
+    error ? set({ loginErr: error.message }) : set({ loginErr: null });
     await get().refreshAuth();
   },
   logout: async () => {
