@@ -1,62 +1,93 @@
 import { create } from "zustand";
 import supabase from "../utils/supabaseClient";
 
+const fetchPostQuery = `id,
+      title, text, imageUrl, startDate, endDate,
+      locations (location, country, lon, lat),
+      authors (name, avatarUrl)`;
+
+async function fetchPostData(column, equalTo) {
+  const { data, error } = column
+    ? await supabase
+        .from("blogposts")
+        .select(fetchPostQuery)
+        .order("startDate", { ascending: false })
+        .eq(column, equalTo)
+    : await supabase
+        .from("blogposts")
+        .select(fetchPostQuery)
+        .order("startDate", { ascending: false });
+  if (error) {
+    console.log(error);
+    return null;
+  }
+  return data;
+}
+
+async function uploadImage(newImageFile, bucket, imgName) {
+  const fileExt = newImageFile.name.split(".").pop();
+  const fileName = `${Math.random()}-${imgName}.${fileExt}`;
+  const { error } = await supabase.storage
+    .from(bucket)
+    .upload(fileName, newImageFile);
+  error && console.log(error);
+  const { data } = await supabase.storage.from(bucket).getPublicUrl(fileName);
+  return data.publicUrl;
+}
+
+async function getLocationId(location, country, lat, lon) {
+  const { data: locationData, error: getLocationErr } = await supabase
+    .from("locations")
+    .select("id")
+    .eq("location", location);
+  getLocationErr && console.log(getLocationErr);
+  if (locationData[0]) {
+    return locationData[0].id;
+  }
+  const { data, error: insertErr } = await supabase
+    .from("locations")
+    .insert({
+      location: location,
+      country: country,
+      lon: lon,
+      lat: lat,
+    })
+    .select("id");
+  insertErr && console.log(insertErr);
+  return data[0].id;
+}
+
 const useStore = create((set, get) => ({
   blogPosts: null,
   detailPost: null,
+  isAuthenticated: false,
+  userId: null,
+  userName: null,
+  userDescription: null,
+  avatarUrl: null,
+  userPosts: null,
+  loading: false,
+  showMobileMenu: false,
+
   getPosts: async () => {
     set({ loading: true });
-    const { data, error } = await supabase
-      .from("blogposts")
-      .select(
-        `id,
-      title, text, imageUrl, startDate, endDate,
-      locations (location, country, lon, lat),
-      authors (name, avatarUrl)`
-      )
-      .order("startDate", { ascending: false });
-    set({ blogPosts: data });
-    if (error) {
-      console.log(error);
-    }
+    const postData = await fetchPostData();
+    set({ blogPosts: postData });
     set({ loading: false });
   },
   getDetailPost: async (postId) => {
-    set({ detailPost: null });
     set({ loading: true });
-    const { data, error } = await supabase
-      .from("blogposts")
-      .select(
-        // TODO: refactor this
-        `id,
-      title, text, imageUrl, startDate, endDate,
-      locations (location, country, lon, lat),
-      authors (name, avatarUrl)`
-      )
-      .eq("id", postId);
-    set({ detailPost: data[0] });
-    if (error) {
-      console.log(error);
-    }
+    set({ detailPost: null });
+    const postData = await fetchPostData("id", postId);
+    set({ detailPost: postData[0] });
     set({ loading: false });
   },
   getUserPosts: async (userId) => {
+    set({ loading: true });
     set({ userPosts: null });
-    const { data, error } = await supabase
-      .from("blogposts")
-      .select(
-        // TODO: refactor this
-        `id,
-      title, text, imageUrl, startDate, endDate,
-      locations (location, country, lon, lat),
-      authors (name, avatarUrl)`
-      )
-      .eq("author_id", userId)
-      .order("startDate", { ascending: false });
-    set({ userPosts: data });
-    if (error) {
-      console.log(error);
-    }
+    const postData = await fetchPostData("author_id", userId);
+    set({ userPosts: postData });
+    set({ loading: false });
   },
   getUserData: async () => {
     set({ loading: true });
@@ -77,48 +108,11 @@ const useStore = create((set, get) => ({
     get().getUserPosts(id);
     set({ loading: false });
   },
-  isAuthenticated: false,
-  userId: null,
-  userName: null,
-  userDescription: null,
-  avatarUrl: null,
-  userPosts: null,
-  refreshAuth: async () => {
-    const { data, error } = await supabase.auth.getSession();
-    if (data.session) {
-      set({ isAuthenticated: true });
-      set({ userId: data.session.user.id });
-    } else {
-      set({ isAuthenticated: false });
-      set({ userId: null });
-    }
-  },
-  login: async (email, password) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    await get().refreshAuth();
-  },
-  logout: async () => {
-    const { error } = await supabase.auth.signOut();
-    await get().refreshAuth();
-  },
   updateUserData: async (formData) => {
-    let imageUrl = await get().avatarUrl;
+    const imageUrl = formData.image[0]
+      ? await uploadImage(formData.image[0], "avatars", formData.name)
+      : await get().avatarUrl;
     const userId = await get().userId;
-    if (formData.image[0]) {
-      const fileExt = formData.image[0].name.split(".").pop();
-      const fileName = `${Math.random()}-${formData.name}.${fileExt}`;
-      const { error: fileuploadErr } = await supabase.storage
-        .from("avatars")
-        .upload(fileName, formData.image[0]);
-      fileuploadErr && console.log(fileuploadErr);
-      const { data: urlData } = supabase.storage
-        .from("avatars")
-        .getPublicUrl(fileName);
-      imageUrl = urlData.publicUrl;
-    }
     const { data, error } = await supabase
       .from("authors")
       .update({
@@ -128,44 +122,21 @@ const useStore = create((set, get) => ({
       })
       .eq("id", userId)
       .select();
-    console.log(data);
     error && console.log(error);
     await get().getUserData;
   },
   createNewPost: async (formData) => {
-    const fileName = `${Math.random()}-${formData.image[0].name}`;
-    const { error: fileuploadErr } = await supabase.storage
-      .from("locations")
-      .upload(fileName, formData.image[0]);
-    fileuploadErr && console.log(fileuploadErr);
-    const { data: urlData } = supabase.storage
-      .from("locations")
-      .getPublicUrl(fileName);
-    const imageUrl = urlData.publicUrl;
-
-    let locationId;
-    const { data: locationData, error } = await supabase
-      .from("locations")
-      .select("id")
-      .eq("location", formData.location);
-    console.log(locationData);
-    if (locationData[0]) {
-      locationId = locationData[0].id;
-    } else {
-      const { data, error } = await supabase
-        .from("locations")
-        .insert({
-          location: formData.location,
-          country: formData.country,
-          lon: formData.longitude,
-          lat: formData.latitude,
-        })
-        .select("id");
-      locationId = data[0].id;
-      error && console.log(error);
-    }
-    error && console.log(error);
-
+    const imageUrl = await uploadImage(
+      formData.image[0],
+      "locations",
+      formData.location
+    );
+    const locationId = await getLocationId(
+      formData.location,
+      formData.country,
+      formData.latitude,
+      formData.longitude
+    );
     const { error: postUploadErr } = await supabase.from("blogposts").insert({
       title: formData.title,
       startDate: formData.startDate,
@@ -178,8 +149,33 @@ const useStore = create((set, get) => ({
     await get().getPosts();
     postUploadErr && console.log(postUploadErr);
   },
-  loading: false,
-  showMobileMenu: false,
+  refreshAuth: async () => {
+    const { data, error } = await supabase.auth.getSession();
+    if (data.session) {
+      set({ isAuthenticated: true });
+      set({ userId: data.session.user.id });
+    } else {
+      get().logout();
+    }
+    error && console.log(error);
+  },
+  login: async (email, password) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    await get().refreshAuth();
+  },
+  logout: async () => {
+    const { error } = await supabase.auth.signOut();
+    set({ isAuthenticated: false });
+    set({ userId: null });
+    set({ userName: null });
+    set({ userDescription: null });
+    set({ avatarUrl: null });
+    set({ userPosts: null });
+    error && console.log(error);
+  },
   toggleMobileMenu: () => {
     set((state) => ({ showMobileMenu: !state.showMobileMenu }));
   },
