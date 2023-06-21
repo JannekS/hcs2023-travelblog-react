@@ -1,10 +1,8 @@
 import AppFooter from "./components/AppFooter";
 import AppHeader from "./components/AppHeader";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import NewPost from "./pages/NewPost";
 import Contact from "./pages/Contact";
-import Credits from "./pages/Credits";
 import Login from "./pages/Login";
 import BlogPost from "./pages/BlogPost";
 import ScrollToTop from "./utils/ScrollToTop";
@@ -45,9 +43,6 @@ function App() {
               <Route path="/">
                 <Home />
               </Route>
-              {/* <Route path="/about">
-                <About />
-              </Route> */}
               <Route path="/new-post">
                 {!isAuthenticated && <Redirect to={"/login"} />}
                 <NewPost />
@@ -59,9 +54,6 @@ function App() {
               <Route path="/contact">
                 <Contact />
               </Route>
-              {/* <Route path="/credits">
-                <Credits />
-              </Route> */}
               <Route path="/profile">
                 {!isAuthenticated && <Redirect to={"/login"} />}
                 <Profile />

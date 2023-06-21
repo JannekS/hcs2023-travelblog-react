@@ -48,7 +48,6 @@ function Profile() {
 
   function onSubmit(data) {
     updateUserData(data);
-    // console.log(data);
     setIsEditMode(false);
   }
   function handleFormReset() {

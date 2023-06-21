@@ -6,7 +6,7 @@ import MapComponent from "./MapComponent";
 function MapSection({ blogPosts, focusLocation }) {
   const [showPopup, setShowPopup] = useState(false);
   const [chosenLocation, setChosenLocation] = useState();
-  const [mapHeightOffset, setMapHeightOffest] = useState("108px"); //156px or
+  const [mapHeightOffset, setMapHeightOffest] = useState("108px");
 
   useEffect(() => {
     window.addEventListener("scroll", adjustMapSize);
@@ -20,9 +20,9 @@ function MapSection({ blogPosts, focusLocation }) {
       window.scrollY >=
       window.document.body.scrollHeight - window.innerHeight - 48
     ) {
-      mapHeightOffset === "108px" && setMapHeightOffest("156px");
+      setMapHeightOffest("md:h-[calc(100vh-156px)]");
     } else {
-      setMapHeightOffest("108px");
+      setMapHeightOffest("md:h-[calc(100vh-108px)]");
     }
   }
 
@@ -37,7 +37,7 @@ function MapSection({ blogPosts, focusLocation }) {
     <section className="w-full lg:w-1/2 p-4">
       {focusLocation ? (
         <div
-          className={`sticky top-20 mt-14 rounded-md h-[80vh] md:h-[calc(100vh-${mapHeightOffset})]`}
+          className={`sticky top-20 mt-14 rounded-md h-[80vh] ${mapHeightOffset}`}
         >
           <MapComponent
             centerLon={focusLocation.locations.lon}

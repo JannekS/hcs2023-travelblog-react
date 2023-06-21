@@ -22,7 +22,6 @@ function NewPost() {
 
   function onSubmit(data) {
     createNewPost(data);
-    console.log(data);
   }
 
   useEffect(() => {
@@ -42,7 +41,6 @@ function NewPost() {
       setValue("latitude", Number(result[0].lat));
       setValue("longitude", Number(result[0].lon));
     }
-    console.log(result);
   }
 
   return (
