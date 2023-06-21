@@ -48,14 +48,15 @@ function BlogPost({ postId }) {
             </div>
 
             <div className="relative w-full h-68 md:h-96 rounded-t-md">
-              {/*TODO: maybe center the image */}
               <img
                 src={post.imageUrl}
                 alt=""
                 className="w-full h-68 md:h-96 object-cover object-center overflow-hidden rounded-md"
               />
             </div>
-            <article className="prose max-w-3xl my-4">{post.text}</article>
+            <article className="max-w-3xl my-4 whitespace-pre-line">
+              {post.text}
+            </article>
             <div className="lg:fixed lg:left-2 lg:top-16 flex flex-row items-center justify-end space-x-1">
               <ArrowLeftIcon className="w-5 h-5" />
               <LinkWrapper href="/">home</LinkWrapper>
