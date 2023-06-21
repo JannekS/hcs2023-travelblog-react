@@ -45,9 +45,9 @@ function App() {
               <Route path="/">
                 <Home />
               </Route>
-              <Route path="/about">
+              {/* <Route path="/about">
                 <About />
-              </Route>
+              </Route> */}
               <Route path="/new-post">
                 {!isAuthenticated && <Redirect to={"/login"} />}
                 <NewPost />
@@ -59,9 +59,9 @@ function App() {
               <Route path="/contact">
                 <Contact />
               </Route>
-              <Route path="/credits">
+              {/* <Route path="/credits">
                 <Credits />
-              </Route>
+              </Route> */}
               <Route path="/profile">
                 {!isAuthenticated && <Redirect to={"/login"} />}
                 <Profile />
