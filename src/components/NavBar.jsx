@@ -30,10 +30,10 @@ function NavBar() {
       </li>
       <li>
         <LinkWrapper
-          href="/about"
+          href="/contact"
           classes="hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
         >
-          About
+          Contact
         </LinkWrapper>
       </li>
       {isAuthenticated && (
