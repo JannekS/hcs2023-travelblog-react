@@ -12,7 +12,7 @@ function NavMobileMenu() {
     <>
       <NavMobileButton toggleMenu={() => toggleMobileMenu()} />
       {showMobileMenu && (
-        <div className="absolute top-14 right-0 py-4 px-8 bg-amber-200/90 backdrop-blur-sm rounded-b-md">
+        <div className="absolute top-14 right-0 py-4 px-8 bg-amber-200 backdrop-blur-sm rounded-b-md">
           <NavBar />
         </div>
       )}
