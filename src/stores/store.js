@@ -93,20 +93,21 @@ const useStore = create((set, get) => ({
   getUserData: async () => {
     set({ loading: true });
     await get().refreshAuth;
-    const {
-      data: {
-        user: { id },
-      },
-    } = await supabase.auth.getUser();
-    const { data, error } = await supabase
-      .from("authors")
-      .select()
-      .eq("id", id);
-    error && console.log(error);
-    set({ userName: data[0].name });
-    set({ avatarUrl: data[0].avatarUrl });
-    set({ userDescription: data[0].description });
-    get().getUserPosts(id);
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData.user) {
+      const { data, error } = await supabase
+        .from("authors")
+        .select()
+        .eq("id", userData.user.id);
+      error && console.log(error);
+      set({ userName: data[0].name });
+      set({ avatarUrl: data[0].avatarUrl });
+      set({ userDescription: data[0].description });
+      get().getUserPosts(userData.user.id);
+    } else {
+      get().logout();
+    }
+
     set({ loading: false });
   },
   updateUserData: async (formData) => {

@@ -44,19 +44,16 @@ function App() {
                 <Home />
               </Route>
               <Route path="/new-post">
-                {!isAuthenticated && <Redirect to={"/login"} />}
-                <NewPost />
+                {isAuthenticated ? <NewPost /> : <Redirect to={"/login"} />}
               </Route>
               <Route path="/login">
-                {isAuthenticated && <Redirect to={"/profile"} />}
-                <Login />
+                {isAuthenticated ? <Redirect to={"/profile"} /> : <Login />}
               </Route>
               <Route path="/contact">
                 <Contact />
               </Route>
               <Route path="/profile">
-                {!isAuthenticated && <Redirect to={"/login"} />}
-                <Profile />
+                {isAuthenticated ? <Profile /> : <Redirect to={"/login"} />}
               </Route>
               <Route path="/post/:id">
                 {(params) => <BlogPost postId={params.id} />}
