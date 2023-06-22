@@ -164,7 +164,7 @@ function Profile() {
               </div>
             </div>
 
-            <div className="border p-4 rounded-md">
+            <div className="border p-4 rounded-md w-full md:w-1/2 max-w-xl">
               <div className="flex flex-row items-center justify-between gap-2">
                 <h3 className="text-xl">Edit your posts or</h3>
                 <Link
@@ -174,11 +174,21 @@ function Profile() {
                   write a new one
                 </Link>
               </div>
-              <ul className="flex flex-col gap-2 mt-4">
-                {userPosts?.map((post) => (
-                  <PostEditCard blogPost={post} key={post.id} />
-                ))}
-              </ul>
+              {userPosts?.length > 0 ? (
+                <ul className="flex flex-col gap-2 mt-4">
+                  {userPosts?.map((post) => (
+                    <PostEditCard blogPost={post} key={post.id} />
+                  ))}
+                </ul>
+              ) : (
+                <div className="p-8 text-center">
+                  <p>You did not write any posts, yet.</p>
+                  <p>
+                    Why don&apos;t you tell us something about your favorite
+                    travel experiences?
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
