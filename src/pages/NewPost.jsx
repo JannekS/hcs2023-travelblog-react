@@ -10,6 +10,7 @@ function NewPost() {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -22,6 +23,11 @@ function NewPost() {
 
   function onSubmit(data) {
     createNewPost(data);
+  }
+
+  function handleReset() {
+    setTempImgUrl(null);
+    reset();
   }
 
   useEffect(() => {
@@ -56,7 +62,7 @@ function NewPost() {
           <form
             action=""
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 w-96"
+            className="flex flex-col gap-4 w-full max-w-lg p-4"
           >
             <div className="flex flex-col gap-1 text-sm">
               <label htmlFor="title">Title</label>
@@ -137,16 +143,16 @@ function NewPost() {
               />
             </div>
             <div className="flex flex-col gap-1 text-sm">
-              <div className="w-full h-64 rounded-md bg-amber-100 flex flex-col items-center justify-center">
+              <div className="w-full h-64 rounded-md border border-slate-500 bg-amber-100 flex flex-col items-center justify-center">
                 <img
                   src={tempImgUrl}
                   alt="Choose an image that resembles your experience"
-                  className="w-full objec-cover overflow-hidden rounded-md text-center text-gray-500"
+                  className="w-full object-cover overflow-hidden rounded-md text-center text-gray-500"
                 />
               </div>
               <label
                 htmlFor="image"
-                className="mt-1 p-1 border border-cyan-700 rounded-md text-center cursor-pointer"
+                className="mt-1 p-1 text-center cursor-pointer border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
               >
                 Select an image
               </label>
@@ -163,12 +169,20 @@ function NewPost() {
               />
             </div>
 
-            <button
-              type="sumbit"
-              className="mt-4 p-1 border border-cyan-700 rounded-md"
-            >
-              Save
-            </button>
+            <div className="flex flex-row gap-2 w-full mt-4">
+              <button
+                onClick={handleReset}
+                className="px-2 py-1 w-1/2 border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="sumbit"
+                className="px-2 py-1 w-1/2 border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+              >
+                Save
+              </button>
+            </div>
           </form>
         </div>
       )}
