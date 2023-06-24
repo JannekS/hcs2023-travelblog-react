@@ -22,7 +22,7 @@ function PostEditCard({ blogPost }) {
       <div className="flex flex-row items-center justify-between">
         <LinkWrapper href={`/post/${blogPost.id}`}>Read Post</LinkWrapper>
         <div className="flex flex-row items-center gap-2">
-          <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100">
+          <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50">
             <PencilIcon className="w-4 h-4" /> <span>Edit</span>
           </button>
           <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-rose-700 hover:text-amber-50">

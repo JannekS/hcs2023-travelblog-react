@@ -75,7 +75,7 @@ function Profile() {
                   {!isEditMode && (
                     <button
                       onClick={() => setIsEditMode(true)}
-                      className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100"
+                      className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50"
                     >
                       <PencilIcon className="w-4 h-4" /> <span>Edit</span>
                     </button>
@@ -98,7 +98,7 @@ function Profile() {
                     {isEditMode && (
                       <label
                         htmlFor="image"
-                        className="mt-1 p-1 w-32 border border-cyan-700 text-xs rounded-md text-center cursor-pointer"
+                        className="mt-1 p-1 w-32 border text-xs text-center cursor-pointer border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
                       >
                         Change your avatar
                       </label>
@@ -148,13 +148,13 @@ function Profile() {
                     <div className="flex flex-row gap-2">
                       <button
                         onClick={handleFormReset}
-                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700 rounded-md"
+                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700/70 hover:bg-cyan-700 hover:text-orange-50 rounded-md"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700 rounded-md"
+                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700/70 hover:bg-cyan-700 hover:text-orange-50 rounded-md"
                       >
                         Save Cahnges
                       </button>
