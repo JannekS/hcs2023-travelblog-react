@@ -152,7 +152,7 @@ function NewPost() {
               </div>
               <label
                 htmlFor="image"
-                className="mt-1 p-1 text-center cursor-pointer border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                className="mt-1 p-1 text-center cursor-pointer bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
               >
                 Select an image
               </label>
@@ -169,16 +169,16 @@ function NewPost() {
               />
             </div>
 
-            <div className="flex flex-row gap-2 w-full mt-4">
+            <div className="flex flex-row gap-4 w-full mt-4">
               <button
                 onClick={handleReset}
-                className="px-2 py-1 w-1/2 border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                className="px-2 py-1 w-1/2 bg-gray-100 border hover:text-orange-50 rounded-md border-cyan-700/40  hover:bg-cyan-700 active:bg-cyan-600"
               >
                 Cancel
               </button>
               <button
                 type="sumbit"
-                className="px-2 py-1 w-1/2 border border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                className="px-2 py-1 w-1/2 bg-cyan-500 hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
               >
                 Save
               </button>
