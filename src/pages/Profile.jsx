@@ -75,7 +75,7 @@ function Profile() {
                   {!isEditMode && (
                     <button
                       onClick={() => setIsEditMode(true)}
-                      className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50"
+                      className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-600"
                     >
                       <PencilIcon className="w-4 h-4" /> <span>Edit</span>
                     </button>
@@ -98,9 +98,9 @@ function Profile() {
                     {isEditMode && (
                       <label
                         htmlFor="image"
-                        className="mt-1 p-1 w-32 border text-xs text-center cursor-pointer border-cyan-700/70  hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                        className="mt-1 p-1 w-28 border text-xs text-center cursor-pointer bg-gray-100 border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
                       >
-                        Change your avatar
+                        Change avatar
                       </label>
                     )}
 
@@ -117,7 +117,7 @@ function Profile() {
                     />
                   </div>
                   <div className="flex flex-row gap-2 items-start">
-                    <label className="w-28" htmlFor="title">
+                    <label className="w-28" htmlFor="name">
                       Name:
                     </label>
                     <input
@@ -127,7 +127,7 @@ function Profile() {
                       disabled={!isEditMode}
                       {...register("name", { required: true, minLength: 3 })}
                       placeholder="Your name"
-                      className="px-2 py-1 border-cyan-700 w-full rounded-md disabled:p-0 disabled:border-none"
+                      className="px-2 py-1 border-cyan-700 flex-1 rounded-md disabled:p-0 disabled:border-none"
                     />
                   </div>
                   <div className="flex flex-row gap-2 items-start">
@@ -140,23 +140,24 @@ function Profile() {
                       disabled={!isEditMode}
                       {...register("description")}
                       placeholder="Tell our readers something about yourself."
-                      className="px-2 py-1 border-cyan-700 w-full min-h-max rounded-md resize-x disabled:p-0 disabled:border-none disabled:resize-none"
+                      className="px-2 py-1 border-cyan-700 flex-1 min-h-max rounded-md resize-x disabled:p-0 disabled:border-none disabled:resize-none"
                     />
                   </div>
 
                   {isEditMode && (
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-4">
                       <button
                         onClick={handleFormReset}
-                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700/70 hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                        className="mt-4 p-1 w-1/2 text-sm bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="mt-4 p-1 w-1/2 text-sm border border-cyan-700/70 hover:bg-cyan-700 hover:text-orange-50 rounded-md"
+                        className="mt-4 p-1 w-1/2 text-sm bg-cyan-500
+                         hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
                       >
-                        Save Cahnges
+                        Save Changes
                       </button>
                     </div>
                   )}
@@ -166,13 +167,17 @@ function Profile() {
 
             <div className="border p-4 rounded-md w-full md:w-1/2 max-w-xl">
               <div className="flex flex-row items-center justify-between gap-2">
-                <h3 className="text-xl">Edit your posts or</h3>
-                <Link
-                  href="/new-post"
-                  className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
-                >
-                  write a new one
-                </Link>
+                <h3 className="text-xl">Edit your posts</h3>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">or </span>
+
+                  <Link
+                    href="/new-post"
+                    className="flex flex-row items-center gap-1 px-2 py-1 bg-cyan-500 rounded-md shadow-md active:shadow-none active:bg-cyan-600 hover:bg-cyan-700 hover:text-orange-50"
+                  >
+                    write a new one
+                  </Link>
+                </div>
               </div>
               {userPosts?.length > 0 ? (
                 <ul className="flex flex-col gap-2 mt-4">
