@@ -94,44 +94,50 @@ function NewPost() {
                 className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
               />
             </div>
-            <div className="flex flex-col gap-1 text-sm">
-              <label htmlFor="latitude">Latitude</label>
-              <input
-                type="text"
-                name="latitude"
-                readOnly={true}
-                {...register("latitude", { required: true })}
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
-              />
+            <div className="flex flex-row items-center gap-4 justify-between w-full max-w-lg">
+              <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
+                <label htmlFor="latitude">Latitude</label>
+                <input
+                  type="text"
+                  name="latitude"
+                  readOnly={true}
+                  {...register("latitude", { required: true })}
+                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                />
+              </div>
+              <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
+                <label htmlFor="longitude">Longitude</label>
+                <input
+                  type="text"
+                  name="longitude"
+                  readOnly={true}
+                  {...register("longitude", { required: true })}
+                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                />
+              </div>
             </div>
-            <div className="flex flex-col gap-1 text-sm">
-              <label htmlFor="longitude">Longitude</label>
-              <input
-                type="text"
-                name="longitude"
-                readOnly={true}
-                {...register("longitude", { required: true })}
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
-              />
+
+            <div className="flex flex-row items-center gap-4 justify-between w-full max-w-lg">
+              <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
+                <label htmlFor="startDate">Start Date</label>
+                <input
+                  type="date"
+                  name="startDate"
+                  {...register("startDate", { required: true, minLength: 10 })}
+                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                />
+              </div>
+              <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
+                <label htmlFor="endDate">End Date</label>
+                <input
+                  type="date"
+                  name="endDate"
+                  {...register("endDate", { required: true })}
+                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                />
+              </div>
             </div>
-            <div className="flex flex-col gap-1 text-sm">
-              <label htmlFor="startDate">Start Date</label>
-              <input
-                type="date"
-                name="startDate"
-                {...register("startDate", { required: true, minLength: 10 })}
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
-              />
-            </div>
-            <div className="flex flex-col gap-1 text-sm">
-              <label htmlFor="endDate">End Date</label>
-              <input
-                type="date"
-                name="endDate"
-                {...register("endDate", { required: true })}
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
-              />
-            </div>
+
             <div className="flex flex-col gap-1 text-sm">
               <label htmlFor="text">Text</label>
               <textarea
