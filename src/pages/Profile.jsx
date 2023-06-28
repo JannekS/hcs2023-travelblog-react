@@ -75,7 +75,7 @@ function Profile() {
                   {!isEditMode && (
                     <button
                       onClick={() => setIsEditMode(true)}
-                      className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-800"
+                      className="btn-secondary flex flex-row items-center gap-1 p-1 text-sm"
                     >
                       <PencilIcon className="w-4 h-4" /> <span>Edit</span>
                     </button>
@@ -98,7 +98,7 @@ function Profile() {
                     {isEditMode && (
                       <label
                         htmlFor="image"
-                        className="mt-1 p-1 w-28 border text-xs text-center cursor-pointer bg-gray-100 border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
+                        className="btn-secondary mt-1 p-1 w-28 text-xs"
                       >
                         Change avatar
                       </label>
@@ -127,7 +127,7 @@ function Profile() {
                       disabled={!isEditMode}
                       {...register("name", { required: true, minLength: 3 })}
                       placeholder="Your name"
-                      className="px-2 py-1 border-cyan-700 flex-1 rounded-md disabled:p-0 disabled:border-none"
+                      className="form-input flex-1 disabled:p-0 disabled:border-none disabled:bg-white"
                     />
                   </div>
                   <div className="flex flex-row gap-2 items-start">
@@ -140,7 +140,7 @@ function Profile() {
                       disabled={!isEditMode}
                       {...register("description")}
                       placeholder="Tell our readers something about yourself."
-                      className="px-2 py-1 border-cyan-700 flex-1 min-h-max rounded-md resize-x disabled:p-0 disabled:border-none disabled:resize-none"
+                      className="form-input flex-1 min-h-max resize-x disabled:p-0 disabled:border-none disabled:resize-none disabled:bg-white"
                     />
                   </div>
 
@@ -148,14 +148,13 @@ function Profile() {
                     <div className="flex flex-row gap-4">
                       <button
                         onClick={handleFormReset}
-                        className="mt-4 p-1 w-1/2 text-sm bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
+                        className="btn-secondary mt-4 p-1 w-1/2 text-sm"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="mt-4 p-1 w-1/2 text-sm bg-cyan-500
-                         hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
+                        className="btn-primary mt-4 p-1 w-1/2 text-sm"
                       >
                         Save Changes
                       </button>
@@ -171,10 +170,7 @@ function Profile() {
                 <div className="flex items-center gap-2">
                   <span className="text-xl">or </span>
 
-                  <Link
-                    href="/new-post"
-                    className="flex flex-row items-center gap-1 px-2 py-1 bg-cyan-500 rounded-md active:shadow-none active:bg-cyan-800 hover:bg-cyan-700 hover:text-orange-50"
-                  >
+                  <Link href="/new-post" className="btn-primary px-2 py-1">
                     write a new one
                   </Link>
                 </div>

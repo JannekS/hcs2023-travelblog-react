@@ -52,7 +52,7 @@ function Login() {
                   })}
                   required={true}
                   placeholder="jane@example.com"
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className="form-input bg-white"
                 />
                 {errors.email && (
                   <p className="text-sm text-rose-700">
@@ -69,7 +69,7 @@ function Login() {
                   {...register("password", { required: true, minLength: 12 })}
                   placeholder="yourSuperS3curePassw0rd"
                   required={true}
-                  className={`rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1`}
+                  className="form-input bg-white"
                 />
                 {errors.password && (
                   <p className="text-sm text-rose-700">
@@ -86,7 +86,7 @@ function Login() {
               <button
                 type="sumbit"
                 disabled={loading}
-                className="rounded-md border p-1 bg-cyan-600 border-cyan-700 hover:bg-cyan-700 hover:text-amber-50"
+                className="btn-primary p-1"
               >
                 Login
               </button>

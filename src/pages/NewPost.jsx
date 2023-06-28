@@ -71,7 +71,7 @@ function NewPost() {
                 name="title"
                 {...register("title", { required: true, minLength: 10 })}
                 placeholder="Make it short and catchy ;-)"
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                className="form-input"
               />
             </div>
             <div className="flex flex-col gap-1 text-sm">
@@ -81,7 +81,7 @@ function NewPost() {
                 name="location"
                 {...register("location", { required: true, minLength: 3 })}
                 placeholder="like 'Hamburg'"
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                className="form-input"
               />
             </div>
             <div className="flex flex-col gap-1 text-sm">
@@ -91,7 +91,7 @@ function NewPost() {
                 name="country"
                 {...register("country", { required: true, minLength: 5 })}
                 placeholder="like 'Germany'"
-                className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                className="form-input"
               />
             </div>
             <div className="flex flex-row items-center gap-4 justify-between w-full max-w-lg">
@@ -102,7 +102,7 @@ function NewPost() {
                   name="latitude"
                   readOnly={true}
                   {...register("latitude", { required: true })}
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className="form-input"
                 />
               </div>
               <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
@@ -112,7 +112,7 @@ function NewPost() {
                   name="longitude"
                   readOnly={true}
                   {...register("longitude", { required: true })}
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -124,7 +124,7 @@ function NewPost() {
                   type="date"
                   name="startDate"
                   {...register("startDate", { required: true, minLength: 10 })}
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className="form-input"
                 />
               </div>
               <div className="flex flex-col gap-1 text-sm w-5/12 sm:w-1/2">
@@ -133,7 +133,7 @@ function NewPost() {
                   type="date"
                   name="endDate"
                   {...register("endDate", { required: true })}
-                  className="rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -145,11 +145,11 @@ function NewPost() {
                 rows={20}
                 {...register("text", { required: true })}
                 placeholder="Tell our readers more about your trip"
-                className="w-full rounded-md bg-amber-100 p-2 focus:ring-cyan-700 focus:border-cyan-700 focus:ring-1"
+                className="w-full form-input"
               />
             </div>
             <div className="flex flex-col gap-1 text-sm">
-              <div className="w-full h-64 rounded-md border border-slate-500 bg-amber-100 flex flex-col items-center justify-center">
+              <div className="form-input w-full h-64 flex flex-col items-center justify-center">
                 <img
                   src={tempImgUrl}
                   alt="Choose an image that resembles your experience"
@@ -158,7 +158,7 @@ function NewPost() {
               </div>
               <label
                 htmlFor="image"
-                className="mt-1 p-1 text-center cursor-pointer bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
+                className="btn-secondary mt-1 p-1 text-center"
               >
                 Select an image
               </label>
@@ -178,14 +178,11 @@ function NewPost() {
             <div className="flex flex-row gap-4 w-full mt-4">
               <button
                 onClick={handleReset}
-                className="px-2 py-1 w-1/2 bg-gray-100 border hover:text-orange-50 rounded-md border-cyan-700/40  hover:bg-cyan-700 active:bg-cyan-800"
+                className="btn-secondary px-2 py-1 w-1/2"
               >
                 Cancel
               </button>
-              <button
-                type="sumbit"
-                className="px-2 py-1 w-1/2 bg-cyan-500 hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
-              >
+              <button type="sumbit" className="btn-primary px-2 py-1 w-1/2">
                 Save
               </button>
             </div>
