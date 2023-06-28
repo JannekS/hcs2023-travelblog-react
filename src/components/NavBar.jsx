@@ -62,7 +62,7 @@ function NavBar() {
         {isAuthenticated ? (
           <button
             onClick={handleLogout}
-            className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+            className="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-800"
           >
             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
             Logout
@@ -70,7 +70,7 @@ function NavBar() {
         ) : (
           <LinkWrapper
             href="/login"
-            classes="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50"
+            classes="flex flex-row items-center gap-1 px-2 py-1 border border-cyan-700/70 rounded-md  hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-600"
           >
             <ArrowRightOnRectangleIcon className="h-5 w-5" />
             Login

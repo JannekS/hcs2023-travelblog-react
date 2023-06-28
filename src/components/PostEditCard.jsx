@@ -22,10 +22,10 @@ function PostEditCard({ blogPost }) {
       <div className="flex flex-row items-center justify-between">
         <LinkWrapper href={`/post/${blogPost.id}`}>Read Post</LinkWrapper>
         <div className="flex flex-row items-center gap-2">
-          <button className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-600">
+          <button className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-800">
             <PencilIcon className="w-4 h-4" /> <span>Edit</span>
           </button>
-          <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-rose-700 hover:text-amber-50 active:bg-rose-600">
+          <button className="flex flex-row items-center gap-1 border p-1 text-sm rounded-md bg-gray-100 hover:bg-rose-700 hover:text-amber-50 active:bg-rose-800">
             <TrashIcon className="w-4 h-4" /> <span>Delete</span>
           </button>
         </div>

@@ -75,7 +75,7 @@ function Profile() {
                   {!isEditMode && (
                     <button
                       onClick={() => setIsEditMode(true)}
-                      className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-600"
+                      className="flex flex-row items-center gap-1 border border-cyan-700/40 p-1 text-sm rounded-md bg-gray-100 hover:bg-cyan-700 hover:text-orange-50 active:bg-cyan-800"
                     >
                       <PencilIcon className="w-4 h-4" /> <span>Edit</span>
                     </button>
@@ -98,7 +98,7 @@ function Profile() {
                     {isEditMode && (
                       <label
                         htmlFor="image"
-                        className="mt-1 p-1 w-28 border text-xs text-center cursor-pointer bg-gray-100 border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
+                        className="mt-1 p-1 w-28 border text-xs text-center cursor-pointer bg-gray-100 border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
                       >
                         Change avatar
                       </label>
@@ -148,14 +148,14 @@ function Profile() {
                     <div className="flex flex-row gap-4">
                       <button
                         onClick={handleFormReset}
-                        className="mt-4 p-1 w-1/2 text-sm bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
+                        className="mt-4 p-1 w-1/2 text-sm bg-gray-100 border border-cyan-700/40  hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
                         className="mt-4 p-1 w-1/2 text-sm bg-cyan-500
-                         hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-600"
+                         hover:bg-cyan-700 hover:text-orange-50 rounded-md active:bg-cyan-800"
                       >
                         Save Changes
                       </button>
@@ -173,7 +173,7 @@ function Profile() {
 
                   <Link
                     href="/new-post"
-                    className="flex flex-row items-center gap-1 px-2 py-1 bg-cyan-500 rounded-md shadow-md active:shadow-none active:bg-cyan-600 hover:bg-cyan-700 hover:text-orange-50"
+                    className="flex flex-row items-center gap-1 px-2 py-1 bg-cyan-500 rounded-md active:shadow-none active:bg-cyan-800 hover:bg-cyan-700 hover:text-orange-50"
                   >
                     write a new one
                   </Link>
