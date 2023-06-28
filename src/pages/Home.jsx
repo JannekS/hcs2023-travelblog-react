@@ -2,14 +2,21 @@ import HeroSection from "../components/HeroSection";
 import Loading from "../components/Loading";
 import MapSection from "../components/MapSection";
 import PostPreviewSection from "../components/PostPreviewSection";
+import { useEffect } from "react";
 import useStore from "../stores/store";
 
 function Home() {
-  // const blogPosts = [...blogPosts].sort((a, b) => a.startDate < b.startDate);
-  const [loading, blogPosts] = useStore((state) => [
+  const [loading, blogPosts, getPosts, refreshAuth] = useStore((state) => [
     state.loading,
     state.blogPosts,
+    state.getPosts,
+    state.refreshAuth,
   ]);
+
+  useEffect(() => {
+    getPosts();
+    refreshAuth();
+  }, []);
 
   return (
     <div className="flex flex-col h-full w-full">
