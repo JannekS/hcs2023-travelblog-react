@@ -17,10 +17,9 @@ function MapComponent({ centerLon, centerLat, initZoom, children }) {
     return clearFlyTo;
   }, [flyToLocation]);
 
-  function handleClick() {}
-
   return (
     <Map
+      id="map"
       initialViewState={{
         longitude: centerLon,
         latitude: centerLat,
@@ -32,7 +31,6 @@ function MapComponent({ centerLon, centerLat, initZoom, children }) {
       scrollZoom={false}
       mapboxAccessToken={MAPBOX_TOKEN}
       ref={mapRef}
-      onClick={handleClick}
     >
       {children}
       <NavigationControl />

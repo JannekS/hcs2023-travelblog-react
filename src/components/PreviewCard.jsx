@@ -21,7 +21,7 @@ function PreviewCard({ blogPost }) {
           className="w-full h-64 object-cover overflow-hidden rounded-t-md"
         />
         <div className="absolute bottom-0 right-0 left-0 flex flex-row items-center justify-between space-x-2 bg-gradient-to-b from-transparent to-gray-900 p-4 text-orange-50">
-          <a href="#map-section">
+          <a href="#map">
             <div
               className="flex flex-row items-center space-x-1"
               onClick={handleLocationClick}

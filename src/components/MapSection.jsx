@@ -34,7 +34,7 @@ function MapSection({ blogPosts, focusLocation }) {
     setChosenLocation(blogPosts.find((post) => post.id === id));
   }
   return (
-    <section id="map-section" className="w-full lg:w-1/2 p-4">
+    <section className="w-full lg:w-1/2 p-4">
       {focusLocation ? (
         <div
           className={`sticky top-20 mt-14 rounded-md h-[80vh] ${mapHeightOffset}`}
