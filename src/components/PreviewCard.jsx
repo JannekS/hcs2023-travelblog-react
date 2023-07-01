@@ -2,8 +2,15 @@ import { MapPinIcon } from "@heroicons/react/24/solid";
 import AuthorAvatar from "./AuthorAvatar";
 import TravelDuration from "./TravelDuration";
 import LinkWrapper from "./LinkWrapper";
+import useStore from "../stores/store";
 
 function PreviewCard({ blogPost }) {
+  const flyTo = useStore((state) => state.flyTo);
+
+  function handleLocationClick() {
+    flyTo(blogPost.locations.lon, blogPost.locations.lat);
+  }
+
   return (
     <div className="flex flex-col max-w-3xl rounded-md shadow-lg bg-amber-50">
       <div className="relative w-full h-64 rounded-t-md">
@@ -14,12 +21,17 @@ function PreviewCard({ blogPost }) {
           className="w-full h-64 object-cover overflow-hidden rounded-t-md"
         />
         <div className="absolute bottom-0 right-0 left-0 flex flex-row items-center justify-between space-x-2 bg-gradient-to-b from-transparent to-gray-900 p-4 text-orange-50">
-          <div className="flex flex-row items-center space-x-1">
-            <MapPinIcon className="w-5 h-5" />
-            <p>
-              {blogPost.locations.location}, {blogPost.locations.country}
-            </p>
-          </div>
+          <a href="#map-section">
+            <div
+              className="flex flex-row items-center space-x-1"
+              onClick={handleLocationClick}
+            >
+              <MapPinIcon className="w-5 h-5" />
+              <p>
+                {blogPost.locations.location}, {blogPost.locations.country}
+              </p>
+            </div>
+          </a>
         </div>
       </div>
       <div className="p-4">

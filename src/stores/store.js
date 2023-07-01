@@ -69,6 +69,7 @@ const useStore = create((set, get) => ({
   loading: false,
   showMobileMenu: false,
   loginErr: null,
+  flyToLocation: null,
 
   getPosts: async () => {
     set({ loading: true });
@@ -184,6 +185,12 @@ const useStore = create((set, get) => ({
   },
   closeMobileMenu: () => {
     set({ showMobileMenu: false });
+  },
+  flyTo: (lon, lat) => {
+    set({ flyToLocation: [lon, lat] });
+  },
+  clearFlyTo: () => {
+    set({ flyToLocation: null });
   },
 }));
 
