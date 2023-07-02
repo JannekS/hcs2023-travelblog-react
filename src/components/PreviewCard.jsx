@@ -23,10 +23,11 @@ function PreviewCard({ blogPost }) {
         <div className="absolute bottom-0 right-0 left-0 flex flex-row items-center justify-between space-x-2 bg-gradient-to-b from-transparent to-gray-900 p-4 text-orange-50">
           <a href="#map">
             <div
-              className="flex flex-row items-center space-x-1"
+              className="flex flex-row items-center space-x-1 group hover:text-cyan-500"
+              title="show on map"
               onClick={handleLocationClick}
             >
-              <MapPinIcon className="w-5 h-5" />
+              <MapPinIcon className="w-5 h-5 group-hover:animate-bounce" />
               <p>
                 {blogPost.locations.location}, {blogPost.locations.country}
               </p>
