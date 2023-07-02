@@ -13,8 +13,8 @@ function MapComponent({ centerLon, centerLat, initZoom, children }) {
   ]);
 
   useEffect(() => {
-    flyToLocation && mapRef.current?.flyTo({ center: flyToLocation });
-    return clearFlyTo;
+    flyToLocation && mapRef.current?.flyTo({ center: flyToLocation, zoom: 4 });
+    return clearFlyTo();
   }, [flyToLocation]);
 
   return (

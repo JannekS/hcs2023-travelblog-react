@@ -26,7 +26,6 @@ function MapSection({ blogPosts, focusLocation }) {
     }
   }
 
-  // TODO: refactor this & use easeTo flyTo moveTo --> we need useMap hook for that: const {current: map} = useMap();
   function handleMarkerClick(id) {
     chosenLocation && showPopup && chosenLocation.id === id
       ? setShowPopup(false)
