@@ -61,9 +61,10 @@ const useStore = create((set, get) => ({
   blogPosts: null,
   detailPost: null,
   isAuthenticated: false,
-  userId: null,
-  userName: null,
-  userDescription: null,
+  user: null,
+  // userId: null,
+  // userName: null,
+  // userDescription: null,
   avatarUrl: null,
   userPosts: null,
   loading: false,
@@ -101,21 +102,21 @@ const useStore = create((set, get) => ({
         .select()
         .eq("id", userData.user.id);
       error && console.log(error);
-      set({ userName: data[0].name });
-      set({ avatarUrl: data[0].avatarUrl });
-      set({ userDescription: data[0].description });
+      console.log(data);
+      set({ user: data[0] });
+      // set({ avatarUrl: data[0].avatarUrl });
+      // set({ userDescription: data[0].description });
       get().getUserPosts(userData.user.id);
     } else {
       get().logout();
     }
-
     set({ loading: false });
   },
   updateUserData: async (formData) => {
     const imageUrl = formData.image[0]
       ? await uploadImage(formData.image[0], "avatars", formData.name)
       : await get().avatarUrl;
-    const userId = await get().userId;
+    const userId = await get().user.id;
     const { data, error } = await supabase
       .from("authors")
       .update({
@@ -144,7 +145,7 @@ const useStore = create((set, get) => ({
       title: formData.title,
       startDate: formData.startDate,
       endDate: formData.endDate,
-      author_id: await get().userId,
+      author_id: await get().user.id,
       imageUrl: imageUrl,
       location_id: locationId,
       text: formData.text,

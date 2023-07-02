@@ -17,9 +17,9 @@ function Profile() {
     userPosts,
     updateUserData,
   ] = useStore((state) => [
-    state.userName,
-    state.avatarUrl,
-    state.userDescription,
+    state.user.name,
+    state.user.avatarUrl,
+    state.user.description,
     state.getUserData,
     state.loading,
     state.userPosts,
