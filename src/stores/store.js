@@ -26,10 +26,10 @@ async function fetchPostData(column, equalTo) {
 
 async function uploadImage(newImageFile, bucket, imgName) {
   const fileExt = newImageFile.name.split(".").pop();
-  const fileName = `${Math.random()}-${imgName}.${fileExt}`;
+  const fileName = `${imgName}.${fileExt}`;
   const { error } = await supabase.storage
     .from(bucket)
-    .upload(fileName, newImageFile);
+    .upload(fileName, newImageFile, { upsert: true });
   error && console.log(error);
   const { data } = await supabase.storage.from(bucket).getPublicUrl(fileName);
   return data.publicUrl;
@@ -62,9 +62,6 @@ const useStore = create((set, get) => ({
   detailPost: null,
   isAuthenticated: false,
   user: null,
-  // userId: null,
-  // userName: null,
-  // userDescription: null,
   avatarUrl: null,
   userPosts: null,
   loading: false,
@@ -102,10 +99,7 @@ const useStore = create((set, get) => ({
         .select()
         .eq("id", userData.user.id);
       error && console.log(error);
-      console.log(data);
       set({ user: data[0] });
-      // set({ avatarUrl: data[0].avatarUrl });
-      // set({ userDescription: data[0].description });
       get().getUserPosts(userData.user.id);
     } else {
       get().logout();
@@ -113,8 +107,9 @@ const useStore = create((set, get) => ({
     set({ loading: false });
   },
   updateUserData: async (formData) => {
+    const authorId = await get().user.author_id;
     const imageUrl = formData.image[0]
-      ? await uploadImage(formData.image[0], "avatars", formData.name)
+      ? await uploadImage(formData.image[0], "avatars", `avatar-${authorId}`)
       : await get().avatarUrl;
     const userId = await get().user.id;
     const { data, error } = await supabase
