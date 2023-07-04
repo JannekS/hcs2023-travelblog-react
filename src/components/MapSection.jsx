@@ -6,7 +6,9 @@ import MapComponent from "./MapComponent";
 function MapSection({ blogPosts, focusLocation }) {
   const [showPopup, setShowPopup] = useState(false);
   const [chosenLocation, setChosenLocation] = useState();
-  const [mapHeightOffset, setMapHeightOffest] = useState("108px");
+  const [mapHeightOffset, setMapHeightOffest] = useState(
+    "md:h-[calc(100vh-108px)]"
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", adjustMapSize);
