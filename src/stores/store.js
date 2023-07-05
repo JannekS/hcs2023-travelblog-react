@@ -128,7 +128,7 @@ const useStore = create((set, get) => ({
     const imageUrl = await uploadImage(
       formData.image[0],
       "locations",
-      formData.location
+      `${formData.location}_${formData.startDate}`
     );
     const locationId = await getLocationId(
       formData.location,
