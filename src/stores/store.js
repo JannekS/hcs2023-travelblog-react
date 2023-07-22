@@ -25,12 +25,13 @@ async function fetchPostData(column, equalTo) {
 }
 
 async function uploadImage(newImageFile, bucket, imgName) {
-  const fileExt = newImageFile.name.split(".").pop();
-  const fileName = `${imgName}.${fileExt}`;
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(fileName, newImageFile, { upsert: true });
-  error && console.log(error);
+  const fileName = `${imgName}.jpg`;
+  if (newImageFile) {
+    const { error } = await supabase.storage
+      .from(bucket)
+      .upload(fileName, newImageFile, { upsert: true });
+    error && console.log(error);
+  }
   const { data } = await supabase.storage.from(bucket).getPublicUrl(fileName);
   return data.publicUrl;
 }
@@ -108,9 +109,11 @@ const useStore = create((set, get) => ({
   },
   updateUserData: async (formData) => {
     const authorId = await get().user.author_id;
-    const imageUrl = formData.image[0]
-      ? await uploadImage(formData.image[0], "avatars", `avatar-${authorId}`)
-      : await get().avatarUrl;
+    const imageUrl = await uploadImage(
+      formData.image[0],
+      "avatars",
+      `avatar-${authorId}`
+    );
     const userId = await get().user.id;
     const { data, error } = await supabase
       .from("authors")
@@ -136,17 +139,32 @@ const useStore = create((set, get) => ({
       formData.latitude,
       formData.longitude
     );
-    const { error: postUploadErr } = await supabase.from("blogposts").insert({
-      title: formData.title,
-      startDate: formData.startDate,
-      endDate: formData.endDate,
-      author_id: await get().user.id,
-      imageUrl: imageUrl,
-      location_id: locationId,
-      text: formData.text,
-    });
+    if (formData.postId > 0) {
+      const { error: postUploadErr } = await supabase
+        .from("blogposts")
+        .update({
+          title: formData.title,
+          startDate: formData.startDate,
+          endDate: formData.endDate,
+          imageUrl: imageUrl,
+          location_id: locationId,
+          text: formData.text,
+        })
+        .eq("id", formData.postId);
+      postUploadErr && console.log(postUploadErr);
+    } else {
+      const { error: postUploadErr } = await supabase.from("blogposts").insert({
+        title: formData.title,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        author_id: await get().user.id,
+        imageUrl: imageUrl,
+        location_id: locationId,
+        text: formData.text,
+      });
+      postUploadErr && console.log(postUploadErr);
+    }
     await get().getPosts();
-    postUploadErr && console.log(postUploadErr);
   },
   refreshAuth: async () => {
     const { data, error } = await supabase.auth.getSession();

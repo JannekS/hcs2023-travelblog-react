@@ -22,9 +22,12 @@ function PostEditCard({ blogPost }) {
       <div className="flex flex-row items-center justify-between">
         <LinkWrapper href={`/post/${blogPost.id}`}>Read Post</LinkWrapper>
         <div className="flex flex-row items-center gap-2">
-          <button className="btn-secondary flex flex-row items-center gap-1 p-1 text-sm">
+          <LinkWrapper
+            href={`/edit-post/${blogPost.id}`}
+            classes="btn-secondary flex flex-row items-center gap-1 p-1 text-sm"
+          >
             <PencilIcon className="w-4 h-4" /> <span>Edit</span>
-          </button>
+          </LinkWrapper>
           <button className="btn-delete">
             <TrashIcon className="w-4 h-4" /> <span>Delete</span>
           </button>

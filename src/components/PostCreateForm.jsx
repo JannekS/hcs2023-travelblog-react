@@ -14,7 +14,10 @@ function PostCreateForm({ post }) {
     formState: { errors },
   } = useForm();
 
-  const createNewPost = useStore((state) => state.createNewPost);
+  const [createNewPost, userName] = useStore((state) => [
+    state.createNewPost,
+    state.user?.name,
+  ]);
   const [location, country] = watch(["location", "country"]);
   const [tempImgUrl, setTempImgUrl] = useState();
   const [routeLocation, setRouteLocation] = useLocation();
@@ -31,6 +34,10 @@ function PostCreateForm({ post }) {
 
   useEffect(() => {
     if (post) {
+      if (userName !== post.authors.name) {
+        setRouteLocation("/login");
+        return;
+      }
       setValue("postId", post?.id);
       setValue("title", post?.title);
       setValue("text", post?.text);
@@ -169,7 +176,7 @@ function PostCreateForm({ post }) {
           />
         </div>
         <label htmlFor="image" className="btn-secondary mt-1 p-1 text-center">
-          Select an image
+          {post ? "Change image" : "Select an image"}
         </label>
         <input
           id="image"

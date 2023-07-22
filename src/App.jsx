@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import NewPost from "./pages/NewPost";
+import EditPost from "./pages/EditPost";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import BlogPost from "./pages/BlogPost";
@@ -28,6 +29,13 @@ function App() {
             </Route>
             <Route path="/new-post">
               {isAuthenticated ? <NewPost /> : <Redirect to={"/login"} />}
+            </Route>
+            <Route path="/edit-post/:id">
+              {isAuthenticated ? (
+                (params) => <EditPost postId={params.id} />
+              ) : (
+                <Redirect to={"/login"} />
+              )}
             </Route>
             <Route path="/login">
               {isAuthenticated ? <Redirect to={"/profile"} /> : <Login />}
