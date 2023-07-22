@@ -36,10 +36,11 @@ function PreviewCard({ blogPost }) {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1 hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70">
-          {" "}
-          {/*TODO: Make inline-block work with line-clamp*/}
-          <LinkWrapper href={`/post/${blogPost.id}`} classes="border-none">
+        <h3 className="mb-4 font-title font-bold text-3xl line-clamp-1 ">
+          <LinkWrapper
+            href={`/post/${blogPost.id}`}
+            classes="border-none hover:underline hover:underline-offset-4 decoration-2 decoration-cyan-700/70"
+          >
             {blogPost.title}
           </LinkWrapper>
         </h3>
